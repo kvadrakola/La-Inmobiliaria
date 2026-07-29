@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* ============================================
+   W3C Design Tokens — Theme Trust
+   Source: src/theme/theme-trust.json
+   ============================================ */
+@theme {
+  /* Colors */
+  --color-primary: #0047AB;
+  --color-accent: #FFFFFF;
+
+  /* Spacing (4px base scale) */
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows (tinted with primary color) */
+  --shadow-soft-sm: 0px 1px 3px 0px #0047AB1A;
+  --shadow-soft: 0px 4px 12px 0px #0047AB1F;
+  --shadow-soft-lg: 0px 8px 24px -4px #0047AB26;
+}
