@@ -1,0 +1,71 @@
+{
+  "$description": "Theme Trust — Inmobiliaria JM Factoria design tokens. Royal Blue conveys reliability, professionalism and legal compliance (RD 1312/2024) for the student housing platform.",
+  "color": {
+    "$type": "color",
+    "primary": {
+      "$value": "#0047AB",
+      "$description": "Royal Blue — primary brand color, used for CTAs, links and key UI accents."
+    },
+    "accent": {
+      "$value": "#FFFFFF",
+      "$description": "White — accent color, used for contrast surfaces and text on primary backgrounds."
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "$description": "4px base spacing scale.",
+    "0": { "$value": "0px" },
+    "1": { "$value": "4px" },
+    "2": { "$value": "8px" },
+    "3": { "$value": "12px" },
+    "4": { "$value": "16px" },
+    "5": { "$value": "20px" },
+    "6": { "$value": "24px" },
+    "8": { "$value": "32px" },
+    "10": { "$value": "40px" },
+    "12": { "$value": "48px" },
+    "16": { "$value": "64px" }
+  },
+  "borderRadius": {
+    "$type": "dimension",
+    "sm": { "$value": "4px" },
+    "md": { "$value": "8px" },
+    "lg": {
+      "$value": "12px",
+      "$description": "Default large radius for cards, modals and property listing tiles."
+    },
+    "xl": { "$value": "16px" },
+    "full": { "$value": "9999px" }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "$description": "Soft shadow variant, tinted with the primary color for a trustworthy, low-contrast elevation feel.",
+    "soft-sm": {
+      "$value": {
+        "color": "#0047AB1A",
+        "offsetX": "0px",
+        "offsetY": "1px",
+        "blur": "3px",
+        "spread": "0px"
+      }
+    },
+    "soft": {
+      "$value": {
+        "color": "#0047AB1F",
+        "offsetX": "0px",
+        "offsetY": "4px",
+        "blur": "12px",
+        "spread": "0px"
+      }
+    },
+    "soft-lg": {
+      "$value": {
+        "color": "#0047AB26",
+        "offsetX": "0px",
+        "offsetY": "8px",
+        "blur": "24px",
+        "spread": "-4px"
+      }
+    }
+  }
+}
