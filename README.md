@@ -1,6 +1,6 @@
 # HabitaFactoría — Semantic Scene Graph
 
-## Resultado para JM y el equipo
+## Resultado para el equipo
 
 Cerramos el circuito: Semantic Scene Graph (React + `data-*` + [manifest.js](src/semantic-graph/manifest.js)) → Penpot MCP → UI generada en Penpot.
 
@@ -8,17 +8,23 @@ La capa `src/semantic-graph` sigue **sin CSS a propósito** (Zero-Geometry): sol
 
 > **Diseño generado en Penpot:** [abrir el archivo compartido](https://design.penpot.app/#/view?file-id=8694f143-a620-8054-8008-6790ee178f11&page-id=2be68822-842f-8175-8008-677e92a06f90&section=interactions&index=0&share-id=2be68822-842f-8175-8008-6796bd4d3f53)
 
+**¿Cómo cambiar de página en Penpot?** Las tres pantallas del proyecto (Inicio, Búsqueda y Detalle) no son pestañas del navegador: son **páginas distintas dentro del mismo archivo** de Penpot. Arriba a la izquierda, en la barra de navegación del archivo, haced clic en el nombre de la página activa (`home-page-001`, etc.) para abrir el menú y elegir otra:
+
+| Paso 1 — localizar el selector de página | Paso 2 — elegir `home-page-001`, `search-page-001` o `detail-page-001` |
+| :---: | :---: |
+| ![En Penpot, el nombre de la página activa aparece arriba a la izquierda, junto al nombre del archivo](src/img/changeTemplatePage.jpg) | ![Al hacer clic se abre el menú con las tres páginas del proyecto](src/img/changeTemplatePage2.jpg) |
+
 | Inicio (`/`) | Búsqueda (`/buscar`) | Detalle (`/propiedad/:id`) |
 | :---: | :---: | :---: |
 | ![Página principal de HabitaFactoría en Penpot](src/img/designPenpotAppMainPage.png) | ![Página de búsqueda de HabitaFactoría en Penpot](src/img/designPenpotAppSearchPage.png) | ![Ficha de propiedad en Penpot](src/img/designPenpotAppOneHousePage.png) |
 
-Si abrís [src/App.jsx](src/App.jsx) veréis que la app entera monta solo tres componentes: `HomeSceneGraph`, `SearchSceneGraph` y `DetailSceneGraph`. Ninguno de los tres importa Tailwind, ninguno tiene un `className` con estilos, no hay un solo `.css` propio de esa carpeta. Eso no es una carpeta a medio hacer ni un descuido: es la arquitectura entera del proyecto, decidida a propósito, y este documento explica por qué la construimos así, cómo funciona pieza por pieza, y qué decir mañana si un profesor pregunta "¿y esto por qué no tiene ni un color?".
+Si abrís [src/App.jsx](src/App.jsx) veréis que el enrutado expone exactamente **tres páginas** (`/`, `/buscar`, `/propiedad/:id`), cada una montada con un componente de escena: `HomeSceneGraph`, `SearchSceneGraph` y `DetailSceneGraph`. El resto del árbol (`BrowserRouter`, `Routes`, `SemanticActionRouter`) solo conecta rutas y navegación; no añade UI visual. Ninguno de los tres componentes de escena importa Tailwind, ninguno tiene un `className` con estilos, no hay un solo `.css` propio de esa carpeta. Eso no es una carpeta a medio hacer ni un descuido: es la arquitectura entera del proyecto, decidida a propósito, y este documento explica por qué la construimos así, cómo funciona pieza por pieza, y qué decir mañana si un profesor pregunta "¿y esto por qué no tiene ni un color?".
 
 Este README está escrito para vosotros cinco, que estáis empezando con React ahora mismo. No asumimos que sabéis lo que es un prop o un hook. Vamos a explicarlo todo con el código real que ya habéis escrito, no con ejemplos inventados.
 
 ## Índice
 
-1. [Resultado para JM y el equipo](#resultado-para-jm-y-el-equipo)
+1. [Resultado para el equipo](#resultado-para-el-equipo)
 2. [El pitch de 30 segundos](#el-pitch-de-30-segundos)
 3. [Glosario exprés](#glosario-exprés)
 4. [Mini-repaso de React con nuestro propio código](#mini-repaso-de-react-con-nuestro-propio-código)
@@ -285,6 +291,8 @@ Esto no es una historia inventada para quedar bien. Está en el propio historial
 
 ```bash
 $ git log --oneline
+docs(readme): add Penpot page-switching guide and refresh README accuracy
+9118bcc docs: add Penpot MCP design results and update Zero-Geometry documentation, add screenshots from penpot
 e45f7fe feat(app): route semantic scene graph as app entry
 127f69a feat(architecture): implement Zero-Geometry Semantic Scene Graph
 a8af89b refactor: rebrand to HabitaFactoría and finalize Atomic Design architecture
