@@ -12,13 +12,16 @@
  * collection, media, every applicable compliance record (regional
  * registry, CEE, and the DIA for this Andalusian property), and actions.
  */
+import { useParams } from 'react-router-dom';
 import { SiteHeader, SiteFooter } from '../nodes/SiteChrome.jsx';
 import { PropertyListing } from '../nodes/PropertyNodes.jsx';
 import { propertyFixtures } from '../fixtures.js';
 
-const featuredProperty = propertyFixtures[0];
-
 export default function DetailSceneGraph() {
+  const { propertyId } = useParams();
+  const property =
+    propertyFixtures.find((item) => item.id === propertyId) ?? propertyFixtures[0];
+
   return (
     <div
       data-scene-schema="proptech-semantic-graph"
@@ -30,7 +33,7 @@ export default function DetailSceneGraph() {
     >
       <SiteHeader />
       <main>
-        <PropertyListing property={featuredProperty} contentDepth="complete" />
+        <PropertyListing property={property} contentDepth="complete" />
       </main>
       <SiteFooter />
     </div>

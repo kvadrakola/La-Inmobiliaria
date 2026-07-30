@@ -1,3 +1,4 @@
+/** @deprecated Replaced by src/semantic-graph/pages/HomeSceneGraph.jsx — not mounted from App. */
 /**
  * Home — Main landing page
  *
