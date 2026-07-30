@@ -18,9 +18,9 @@ La capa `src/semantic-graph` sigue **sin CSS a propósito** (Zero-Geometry): sol
 | :---: | :---: | :---: |
 | ![Página principal de HabitaFactoría en Penpot](src/img/designPenpotAppMainPage.png) | ![Página de búsqueda de HabitaFactoría en Penpot](src/img/designPenpotAppSearchPage.png) | ![Ficha de propiedad en Penpot](src/img/designPenpotAppOneHousePage.png) |
 
-Si abrís [src/App.jsx](src/App.jsx) veréis que el enrutado expone exactamente **tres páginas** (`/`, `/buscar`, `/propiedad/:id`), cada una montada con un componente de escena: `HomeSceneGraph`, `SearchSceneGraph` y `DetailSceneGraph`. El resto del árbol (`BrowserRouter`, `Routes`, `SemanticActionRouter`) solo conecta rutas y navegación; no añade UI visual. Ninguno de los tres componentes de escena importa Tailwind, ninguno tiene un `className` con estilos, no hay un solo `.css` propio de esa carpeta. Eso no es una carpeta a medio hacer ni un descuido: es la arquitectura entera del proyecto, decidida a propósito, y este documento explica por qué la construimos así, cómo funciona pieza por pieza, y qué decir mañana si un profesor pregunta "¿y esto por qué no tiene ni un color?".
+Si abrís [src/App.jsx](src/App.jsx) veréis que el enrutado expone exactamente **tres páginas** (`/`, `/buscar`, `/propiedad/:id`), cada una montada con un componente de escena: `HomeSceneGraph`, `SearchSceneGraph` y `DetailSceneGraph`. El resto del árbol (`BrowserRouter`, `Routes`, `SemanticActionRouter`) solo conecta rutas y navegación; no añade UI visual. Ninguno de los tres componentes de escena importa Tailwind, ninguno tiene un `className` con estilos, no hay un solo `.css` propio de esa carpeta. Eso no es una carpeta a medio hacer ni un descuido: es la arquitectura entera del proyecto, decidida a propósito, y este documento explica por qué la construimos así, cómo funciona pieza por pieza, y qué podemos decir si un profesor pregunta "¿y esto por qué no tiene ni un color?".
 
-Este README está escrito para vosotros cinco, que estáis empezando con React ahora mismo. No asumimos que sabéis lo que es un prop o un hook. Vamos a explicarlo todo con el código real que ya habéis escrito, no con ejemplos inventados.
+Este README está pensado para nosotros cinco: todos estamos empezando con React, y este documento nos ayudará a entender el proyecto paso a paso. No damos por hecho que sepamos qué es un prop o un hook. Lo explicamos todo con el código real que ya hemos escrito entre todos, no con ejemplos inventados.
 
 ## Índice
 
@@ -43,11 +43,11 @@ Este README está escrito para vosotros cinco, que estáis empezando con React a
 
 ## El pitch de 30 segundos
 
-Memorizad este párrafo. Es vuestra red de seguridad si os quedáis en blanco delante del profesor:
+Memorizad este párrafo. Es nuestra red de seguridad si nos quedamos en blanco delante del profesor:
 
-> "Hemos construido HabitaFactoría, un portal de alquiler de vivienda para estudiantes en España. La parte que os vamos a enseñar separa por completo el *significado* de los datos (qué es una propiedad, cuánto cuesta, qué exige la ley) de su *aspecto visual* (colores, tamaños, dónde va cada cosa en pantalla). Todo lo que hay en `src/semantic-graph` es HTML semántico con atributos `data-*`, cero CSS — a propósito. Esa capa Zero-Geometry nos permitió generar el diseño en Penpot vía MCP sin tocar la lógica ni los datos. El folleto visual vive en Penpot; la ficha técnica sigue en React sin estilos."
+> "Hemos construido HabitaFactoría, un portal de alquiler de vivienda para estudiantes en España. La parte que vamos a enseñar separa por completo el *significado* de los datos (qué es una propiedad, cuánto cuesta, qué exige la ley) de su *aspecto visual* (colores, tamaños, dónde va cada cosa en pantalla). Todo lo que hay en `src/semantic-graph` es HTML semántico con atributos `data-*`, cero CSS — a propósito. Esa capa Zero-Geometry nos permitió generar el diseño en Penpot vía MCP sin tocar la lógica ni los datos. El folleto visual vive en Penpot; la ficha técnica sigue en React sin estilos."
 
-Nada de "cutting-edge" ni "pionero". Es una decisión de arquitectura con un motivo concreto, y en este documento os enseñamos ese motivo con pruebas: código real, commits reales y el archivo de Penpot.
+Nada de "cutting-edge" ni "pionero". Es una decisión de arquitectura con un motivo concreto, y en este documento explicamos ese motivo con pruebas: código real, commits reales y el archivo de Penpot.
 
 ### Stack técnico (por si preguntan)
 
@@ -60,7 +60,7 @@ Nada de "cutting-edge" ni "pionero". Es una decisión de arquitectura con un mot
 
 ## Glosario exprés
 
-Antes de seguir, unas definiciones cortas. Las repetiremos con más detalle al final del documento, pero necesitáis esto ya para entender lo que viene:
+Antes de seguir, unas definiciones cortas. Las repetiremos con más detalle al final del documento, pero necesitamos esto ya para entender lo que viene:
 
 - **Componente**: una función de JavaScript que devuelve HTML (en realidad JSX). Es el ladrillo básico de React.
 - **Prop**: un dato que un componente padre le pasa a un componente hijo. Como un argumento de función.
@@ -75,7 +75,7 @@ Antes de seguir, unas definiciones cortas. Las repetiremos con más detalle al f
 
 ## Mini-repaso de React con nuestro propio código
 
-Si esta es literalmente vuestra primera vez con React, leed esto antes que nada. Cada concepto está explicado con una cita de vuestro propio código, no con un ejemplo de un tutorial.
+Si esta es literalmente nuestra primera vez con React, leed esto antes que nada. Cada concepto está explicado con una cita de nuestro propio código, no con un ejemplo de un tutorial.
 
 ### ¿Qué es un componente?
 
@@ -239,7 +239,7 @@ También lo usamos para añadir un atributo *solo si* se cumple una condición, 
 
 Si `expensesIncluded` es `true`, esa línea "desparrama" `{ 'data-inseparable-fact': 'true' }` como si fuera un atributo más del JSX. Si es `false`, desparrama un objeto vacío `{}`, o sea, no añade nada.
 
-Con esto ya tenéis el 90% del vocabulario de React que necesitáis para entender el resto del documento. Vamos a la arquitectura.
+Con esto ya tenéis el 90% del vocabulario de React para seguir con el resto del documento. Vamos a la arquitectura.
 
 ---
 
@@ -805,7 +805,7 @@ Ese pipeline ya se usó al generar el diseño. Con Penpot MCP partimos del Scene
 
 ### El pitch de 30 segundos (otra vez, para tenerlo a mano)
 
-> "Hemos construido HabitaFactoría, un portal de alquiler de vivienda para estudiantes en España. La parte que os vamos a enseñar separa por completo el significado de los datos de su aspecto visual. Todo lo que hay en `src/semantic-graph` es HTML semántico con atributos `data-*`, cero CSS a propósito. El diseño visual ya está en Penpot, generado vía MCP desde ese grafo, sin tocar la lógica ni los datos."
+> "Hemos construido HabitaFactoría, un portal de alquiler de vivienda para estudiantes en España. La parte que vamos a enseñar separa por completo el significado de los datos de su aspecto visual. Todo lo que hay en `src/semantic-graph` es HTML semántico con atributos `data-*`, cero CSS a propósito. El diseño visual ya está en Penpot, generado vía MCP desde ese grafo, sin tocar la lógica ni los datos."
 
 ### Preguntas frecuentes del profesor (con respuestas guionizadas)
 
@@ -814,15 +814,15 @@ Cada respuesta está pensada para decirse en voz alta en menos de 20 segundos. S
 | Pregunta | Respuesta (máx. 3 frases) |
 |---|---|
 | **¿Por qué no hay CSS ni Tailwind aquí?** | No hay CSS porque esta capa solo describe qué es cada cosa, no cómo se ve — Zero-Geometry a propósito. El diseño visual ya se generó en Penpot a partir de estos mismos datos y tokens, sin tocar la lógica. *Si insiste: abrid el enlace de Penpot; `src/semantic-graph` sigue sin estilos porque el folleto no vive en React.* |
-| **¿Qué es exactamente un prop? Explicádmelo.** | Un prop es un dato que un componente padre le pasa a uno hijo, como el argumento de una función. Por ejemplo, `HomeSceneGraph` le pasa `agents={agentFixtures}` a `TeamMemberProfileCollection`, y ese componente solo los recibe y los pinta, no se inventa nada. |
-| **¿Por qué separasteis los datos (fixtures) de los componentes?** | Porque si los mezclamos, cualquier cambio de diseño obliga a tocar la lógica, y cualquier cambio de dato obliga a tocar el diseño. Separados, `fixtures.js` puede cambiar sin romper nada visual, y al revés. |
-| **¿Cómo sabéis que esto funciona si no se ve nada bonito?** | En React, el HTML se renderiza igual, con todos los `data-*` correctos, solo que sin colores ni maquetación: DevTools lo demuestran frente al manifest. El aspecto visual no está vacío — está en Penpot, generado desde ese mismo grafo. |
+| **¿Qué es exactamente un prop?** | Un prop es un dato que un componente padre le pasa a uno hijo, como el argumento de una función. Por ejemplo, `HomeSceneGraph` le pasa `agents={agentFixtures}` a `TeamMemberProfileCollection`, y ese componente solo los recibe y los pinta, no se inventa nada. |
+| **¿Por qué separamos los datos (fixtures) de los componentes?** | Porque si los mezclamos, cualquier cambio de diseño obliga a tocar la lógica, y cualquier cambio de dato obliga a tocar el diseño. Separados, `fixtures.js` puede cambiar sin romper nada visual, y al revés. |
+| **¿Cómo sabemos que esto funciona si no se ve nada bonito?** | En React, el HTML se renderiza igual, con todos los `data-*` correctos, solo que sin colores ni maquetación: DevTools lo demuestran frente al manifest. El aspecto visual no está vacío — está en Penpot, generado desde ese mismo grafo. |
 | **¿Esto es React puro o algún framework extra?** | React puro, con React Router para las rutas. No hay ninguna librería de componentes visuales en `semantic-graph`, porque esa capa no lleva UI estilizada; el diseño visual está en Penpot. |
 | **¿Por qué el mismo `property-001` aparece en Home, Search y Detail?** | Porque es la misma propiedad real, no tres propiedades distintas. El id viene de `fixtures.js` y tanto el manifest como los componentes lo reutilizan tal cual, así nunca pueden desincronizarse. |
 | **¿Qué pasa si hago click en un botón, si no hay `onClick` en cada uno?** | Hay un único componente, `SemanticActionRouter`, que escucha todos los clicks del documento y mira el atributo `data-action-intent` del elemento pulsado. Según ese valor decide a qué ruta navegar, en vez de que cada botón tenga su propio manejador. |
-| **¿Esto lo entendisteis vosotros o solo lo copiasteis?** | Lo entendimos nosotros: el historial de commits lo demuestra. Empezamos con Tailwind y Atomic Design (`dbc9e75`, `a8af89b`), funcionaba, y decidimos reconstruirlo como Zero-Geometry en `127f69a` para separar dato y diseño. *Si insiste: si lo hubiéramos copiado no tendríamos la versión anterior todavía en el repo, marcada `@deprecated`.* |
+| **¿Lo entendimos nosotros o solo lo copiamos?** | Lo entendimos nosotros: el historial de commits lo demuestra. Empezamos con Tailwind y Atomic Design (`dbc9e75`, `a8af89b`), funcionaba, y decidimos reconstruirlo como Zero-Geometry en `127f69a` para separar dato y diseño. *Si insiste: si lo hubiéramos copiado no tendríamos la versión anterior todavía en el repo, marcada `@deprecated`.* |
 | **¿No es raro marcar los datos como `"fixture"` y `"unverified"`? ¿No es eso mentir?** | Es lo contrario de mentir: es dejar clarísimo qué está verificado y qué no. `data-record-status="fixture"` avisa a cualquiera que lea el dato de que es un ejemplo de prueba, no una afirmación legal real todavía. |
-| **¿Por qué usáis JSDoc y no TypeScript para los tipos?** | Porque documenta la forma de los datos sin añadir una herramienta nueva que aprender de golpe, siendo nuestro primer proyecto en React. La información de tipos existe igual, solo que como comentario en vez de como sintaxis nueva. |
+| **¿Por qué usamos JSDoc y no TypeScript para los tipos?** | Porque documenta la forma de los datos sin añadir una herramienta nueva que aprender de golpe, siendo nuestro primer proyecto en React. La información de tipos existe igual, solo que como comentario en vez de como sintaxis nueva. |
 
 ### Lo que NO debéis decir
 
@@ -835,7 +835,7 @@ Cada respuesta está pensada para decirse en voz alta en menos de 20 segundos. S
 - **NO digáis:** "Todavía no está terminado, falta todo el diseño."
   **Decid:** "La capa semántica no tiene CSS a propósito. El diseño visual ya está en Penpot, generado desde ese grafo con los tokens Trust."
 
-### Conceptos que debéis poder definir sin mirar el README
+### Conceptos que nos conviene poder definir sin mirar el README
 
 - Prop
 - Componente
