@@ -9,7 +9,6 @@
  * 3-tier hierarchy: Base → Semantic → Component
  */
 
-import StyleDictionary from 'style-dictionary';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
