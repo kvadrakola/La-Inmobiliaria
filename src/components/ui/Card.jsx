@@ -4,7 +4,7 @@
  * Atomic Design: Molecule
  * Uses W3C Design Tokens via CSS variables: var(--card-bg), var(--card-border), var(--card-radius)
  */
-export default function Card({ title, description, price, imageUrl, badge, className = '' }) {
+export default function Card({ id, title, description, price, imageUrl, badge, className = '' }) {
   return (
     <article
       className={`overflow-hidden transition-shadow duration-200 hover:shadow-lg ${className}`}

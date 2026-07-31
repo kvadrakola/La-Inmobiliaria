@@ -7,44 +7,50 @@
  * - Agent Info (Fotos/Nombres de agentes)
  * - Property Showcase / Vitrina (Vitrina de propiedades)
  * - "Gastos Incluidos" labels on property cards
+ *
+ * Data is fetched from mockData. Replace with real API calls when backend is ready.
  */
+import { useState, useEffect } from 'react';
 import Header from '../components/layout/Header.jsx';
 import Footer from '../components/layout/Footer.jsx';
 import Button from '../components/ui/Button.jsx';
-import Card from '../components/ui/Card.jsx';
-
-// ── Mock data (placeholder — will be replaced with API/backend) ─────
-const agents = [
-  { name: 'María García', role: 'Agente Senior', photo: 'https://i.pravatar.cc/150?img=1' },
-  { name: 'Carlos López', role: 'Agente de Alquileres', photo: 'https://i.pravatar.cc/150?img=3' },
-  { name: 'Ana Martínez', role: 'Asesora Estudiantil', photo: 'https://i.pravatar.cc/150?img=5' },
-];
-
-const properties = [
-  {
-    title: 'Habitación en el Centro',
-    description: 'Habitación amueblada con vistas a la plaza mayor. Wifi, calefacción y limpieza incluidos.',
-    price: 450,
-    imageUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop',
-    badge: 'Gastos Incluidos',
-  },
-  {
-    title: 'Estudio en Moncloa',
-    description: 'Estudio completo cerca de la universidad. Ideal para estudiantes de intercambio.',
-    price: 550,
-    imageUrl: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop',
-    badge: 'Gastos Incluidos',
-  },
-  {
-    title: 'Piso Compartido Chamberí',
-    description: 'Habitación en piso compartido con 3 estudiantes. Ambiente internacional y acogedor.',
-    price: 380,
-    imageUrl: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop',
-    badge: 'Gastos Incluidos',
-  },
-];
+import AgentList from '../components/agents/AgentList.jsx';
+import PropertyList from '../components/properties/PropertyList.jsx';
+import { fetchAgents, fetchProperties } from '../data/mockData.js';
 
 export default function Home() {
+  const [agents, setAgents] = useState([]);
+  const [agentsLoading, setAgentsLoading] = useState(true);
+  const [agentsError, setAgentsError] = useState(null);
+
+  const [properties, setProperties] = useState([]);
+  const [propertiesLoading, setPropertiesLoading] = useState(true);
+  const [propertiesError, setPropertiesError] = useState(null);
+
+  useEffect(() => {
+    fetchAgents()
+      .then((data) => {
+        setAgents(data);
+        setAgentsLoading(false);
+      })
+      .catch((err) => {
+        setAgentsError(err.message);
+        setAgentsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchProperties()
+      .then((data) => {
+        setProperties(data);
+        setPropertiesLoading(false);
+      })
+      .catch((err) => {
+        setPropertiesError(err.message);
+        setPropertiesLoading(false);
+      });
+  }, []);
+
   return (
     <>
       <Header />
@@ -77,24 +83,11 @@ export default function Home() {
             <h2 className="mb-10 text-center text-2xl font-bold" style={{ color: 'var(--color-text-body)' }}>
               Nuestro Equipo
             </h2>
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {agents.map((agent) => (
-                <div key={agent.name} className="flex flex-col items-center text-center">
-                  <img
-                    src={agent.photo}
-                    alt={agent.name}
-                    className="mb-4 h-24 w-24 rounded-full object-cover"
-                    loading="lazy"
-                  />
-                  <h3 className="text-lg font-semibold" style={{ color: 'var(--color-text-body)' }}>
-                    {agent.name}
-                  </h3>
-                  <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-                    {agent.role}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <AgentList
+              agents={agents}
+              isLoading={agentsLoading}
+              error={agentsError}
+            />
           </div>
         </section>
 
@@ -104,18 +97,11 @@ export default function Home() {
             <h2 className="mb-10 text-center text-2xl font-bold" style={{ color: 'var(--color-text-body)' }}>
               Vitrina de Propiedades
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {properties.map((property) => (
-                <Card
-                  key={property.title}
-                  title={property.title}
-                  description={property.description}
-                  price={property.price}
-                  imageUrl={property.imageUrl}
-                  badge={property.badge}
-                />
-              ))}
-            </div>
+            <PropertyList
+              properties={properties}
+              isLoading={propertiesLoading}
+              error={propertiesError}
+            />
             <div className="mt-10 text-center">
               <Button variant="outline">Ver Todas las Propiedades</Button>
             </div>
