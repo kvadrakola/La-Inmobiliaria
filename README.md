@@ -2,7 +2,9 @@
 
 Plataforma web para una inmobiliaria especializada en alquiler de pisos compartidos para estudiantes. El proyecto nace como encargo (ficticio) de bootcamp: una inmobiliaria de una ciudad necesita una web moderna, transparente y sin comisiones ocultas para gestionar sus propiedades en alquiler.
 
-> **Estado actual: Sprint 1** — Fase de diseño y planificación. Aún no hay código de la aplicación; el entregable de este sprint es el diseño en Penpot y la organización del equipo/backlog.
+🔗 **Enlaces del proyecto:**
+- 🎨 Diseño en Penpot: [ver prototipo](https://design.penpot.app/#/view?file-id=8694f143-a620-8054-8008-6790ee178f11&page-id=2be68822-842f-8175-8008-677e92a06f90&section=interactions&index=0&share-id=2be68822-842f-8175-8008-6796bd4d3f53)
+- 🚀 Despliegue en Vercel: [habitafactoria.vercel.app](https://habitafactoria.vercel.app/)
 
 ---
 
@@ -28,10 +30,8 @@ En este primer sprint el objetivo ha sido sentar las bases del proyecto antes de
 - [x] Definición de la identidad visual preliminar (paleta de color, tipografía)
 - [x] Organización del equipo y roles
 - [x] Configuración del tablero de tareas (GitHub Projects / Jira)
-- [ ] Inicialización del repositorio y del proyecto React *(arranca en Sprint 2)*
-- [ ] Maquetación de las primeras vistas *(Sprint 2)*
-
-📎 El diseño de Penpot de referencia para este sprint incluye la portada (hero con CTA "Ver Propiedades") y la sección "Nuestro Equipo".
+- [x] Inicialización del repositorio y del proyecto React
+- [x] Maquetación de las primeras vistas
 
 ---
 
@@ -59,11 +59,9 @@ En este primer sprint el objetivo ha sido sentar las bases del proyecto antes de
 
 ## 🚀 Próximos pasos (Sprint 2)
 
-- Inicializar el proyecto React
 - Traducir los wireframes de Penpot a componentes maquetados
 - Implementar HEADER, MAIN y FOOTER comunes
 - Primeras vistas: Inicio, Propiedades, Sobre Nosotros, Contacto
-- Primer despliegue en Vercel
 
 ---
 
