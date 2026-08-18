@@ -4,7 +4,7 @@
  * Atomic Design: Molecule
  * Uses W3C Design Tokens via CSS variables: var(--card-bg), var(--card-border), var(--card-radius)
  */
-export default function Card({ id, title, description, price, imageUrl, badge, className = '' }) {
+export default function Card({ id, title, description, price, imageUrl, badge, smokingRestriction, className = '' }) {
   return (
     <article
       className={`overflow-hidden transition-shadow duration-200 hover:shadow-lg ${className}`}
@@ -28,12 +28,19 @@ export default function Card({ id, title, description, price, imageUrl, badge, c
 
       {/* Content */}
       <div className="p-4">
-        {/* Badge — e.g. "Gastos Incluidos" */}
-        {badge && (
-          <span className="mb-2 inline-block rounded bg-green-600 px-2 py-0.5 text-xs font-bold text-white">
-            {badge}
-          </span>
-        )}
+        {/* Badges — "Gastos Incluidos" and "Prohibido Fumar" */}
+        <div className="mb-2 flex flex-wrap gap-2">
+          {badge && (
+            <span className="inline-block rounded bg-green-600 px-5 py-0.5 text-xs font-bold text-white">
+              {badge}
+            </span>
+          )}
+          {smokingRestriction && (
+            <span className="inline-block rounded bg-red-600 px-5 py-0.5 text-xs font-bold text-white">
+              {smokingRestriction}
+            </span>
+          )}
+        </div>
 
         {/* Title */}
         <h3 className="mb-1 text-lg font-semibold" style={{ color: 'var(--color-text-body)' }}>

@@ -49,5 +49,6 @@ export const fetchProperties = () => Promise.resolve([
     price: 320,
     imageUrl: 'public/img/room4.png',
     badge: 'Gastos Incluidos',
+    smokingRestriction: '🚭 Prohibido Fumar',
   },
 ]);
