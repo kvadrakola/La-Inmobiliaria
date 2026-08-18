@@ -42,4 +42,12 @@ export const fetchProperties = () => Promise.resolve([
     imageUrl: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop',
     badge: 'Gastos Incluidos',
   },
+  {
+    id: 4,
+    title: 'Piso Compartido en Sevilla',
+    description: 'Habitación en un piso compartido con 5 estudiantes. Cerca del Ayuntamiento.',
+    price: 320,
+    imageUrl: 'public/img/room4.png',
+    badge: 'Gastos Incluidos',
+  },
 ]);
