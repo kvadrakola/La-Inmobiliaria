@@ -4,7 +4,7 @@
  * Atomic Design: Molecule
  * Uses W3C Design Tokens via CSS variables: var(--card-bg), var(--card-border), var(--card-radius)
  */
-export default function Card({ id, title, description, price, imageUrl, badge, smokingRestriction, className = '' }) {
+export default function Card({ id, title, description, price, imageUrl, badge, smokingRestriction, petRestriction, className = '' }) {
   return (
     <article
       className={`overflow-hidden transition-shadow duration-200 hover:shadow-lg ${className}`}
@@ -28,7 +28,7 @@ export default function Card({ id, title, description, price, imageUrl, badge, s
 
       {/* Content */}
       <div className="p-4">
-        {/* Badges — "Gastos Incluidos" and "Prohibido Fumar" */}
+        {/* Badges — "Gastos Incluidos", "Prohibido Fumar" and "Prohibido Mascotas" */}
         <div className="mb-2 flex flex-wrap gap-2">
           {badge && (
             <span className="inline-block rounded bg-green-600 px-5 py-0.5 text-xs font-bold text-white">
@@ -38,6 +38,11 @@ export default function Card({ id, title, description, price, imageUrl, badge, s
           {smokingRestriction && (
             <span className="inline-block rounded bg-red-600 px-5 py-0.5 text-xs font-bold text-white">
               {smokingRestriction}
+            </span>
+          )}
+          {petRestriction && (
+            <span className="inline-block rounded bg-orange-600 px-5 py-0.5 text-xs font-bold text-white">
+              {petRestriction}
             </span>
           )}
         </div>

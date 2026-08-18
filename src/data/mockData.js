@@ -33,6 +33,7 @@ export const fetchProperties = () => Promise.resolve([
     price: 550,
     imageUrl: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop',
     badge: 'Gastos Incluidos',
+    petRestriction: '🐾 Prohibido Mascotas',
   },
   {
     id: 3,
