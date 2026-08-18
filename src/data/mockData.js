@@ -46,7 +46,7 @@ export const fetchProperties = () => Promise.resolve([
   {
     id: 4,
     title: 'Piso Compartido en Sevilla',
-    description: 'Habitación en un piso compartido con 5 estudiantes. Cerca del Ayuntamiento.',
+    description: 'Habitación en piso compartido con 5 estudiantes. Cerca del Ayuntamiento.',
     price: 320,
     imageUrl: 'public/img/room4.png',
     badge: 'Gastos Incluidos',
