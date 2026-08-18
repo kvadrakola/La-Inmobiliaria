@@ -13,6 +13,7 @@ function BrandIdentityMark({ agency }) {
   return (
     <a
       href="/"
+      className="brand-mark"
       data-node-id={`${agency.id}-brand-mark`}
       data-node-type="agency"
       data-semantic-role="field"
@@ -32,6 +33,7 @@ function NavigationAction({ item }) {
   return (
     <a
       href="#"
+      className="nav-item"
       data-node-id={item.id}
       data-node-type="agency"
       data-semantic-role="action"
@@ -46,10 +48,17 @@ function NavigationAction({ item }) {
 
 export function SiteHeader() {
   return (
-    <header>
-      <BrandIdentityMark agency={agencyFixture} />
-      <nav aria-label="Navegación principal">
+    <header className="site-header">
+      <div className="brand-logo">
+        <BrandIdentityMark agency={agencyFixture} />
+      </div>
+
+      <nav
+      className="site-nav"
+      aria-label="Navegación principal"
+      >
         <ul
+          className="flex items-center gap-6"
           data-node-id={siteNavigationFixture.id}
           data-node-type="agency"
           data-semantic-role="collection"
@@ -198,7 +207,7 @@ function LegalDocumentCollection({ collection }) {
 
 export function SiteFooter() {
   return (
-    <footer>
+    <footer className="site-footer">
       <AgencyContactPoint agency={agencyFixture} />
       <PaymentMethodAssertion payment={paymentMethodFixture} />
       <AgencyProfessionalCredential credential={agencyFixture.professionalCredential} />
