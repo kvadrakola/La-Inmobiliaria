@@ -19,65 +19,81 @@ export function AgencyIntroduction({ agency }) {
       data-node-type="agency"
       data-semantic-role="entity"
       data-business-priority="critical"
+      className="bg-[#0047AB] text-white px-4 py-16 sm:px-6 lg:px-8"
     >
-      <h1
-        data-node-id={`${agency.id}-trade-name`}
-        data-node-type="agency"
-        data-semantic-role="field"
-        data-concept-id="agency-trade-name"
-        data-content-kind="text"
-        data-content-source="fixture"
-        data-required="true"
-      >
-        {agency.tradeName}
-      </h1>
-      <p
-        data-node-id={`${agency.id}-mission`}
-        data-node-type="agency"
-        data-semantic-role="field"
-        data-concept-id="agency-mission-statement"
-        data-content-kind="text"
-        data-content-source="cms"
-        data-required="true"
-        data-max-length="400"
-      >
-        {agency.missionStatement}
-      </p>
-      <p
-        data-node-id={`${agency.id}-history`}
-        data-node-type="agency"
-        data-semantic-role="field"
-        data-concept-id="agency-history-narrative"
-        data-content-kind="text"
-        data-content-source="cms"
-        data-required="true"
-        data-max-length="600"
-      >
-        {agency.historyNarrative}
-      </p>
-      <p
-        data-node-id={`${agency.id}-founding-year`}
-        data-node-type="agency"
-        data-semantic-role="field"
-        data-concept-id="agency-founding-year"
-        data-content-kind="date"
-        data-content-source="fixture"
-        data-required="false"
-      >
-        Operando desde {agency.foundingYear}
-      </p>
-      <button
-        type="button"
-        data-node-id="action-navigate-search-from-intro-001"
-        data-node-type="agency"
-        data-semantic-role="action"
-        data-action-id="action-navigate-search-from-intro-001"
-        data-action-intent="navigate-search"
-        data-content-kind="action-label"
-        data-required="false"
-      >
-        Ver Propiedades
-      </button>
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col md:flex-row items-center gap-10">
+          <div className="w-full md:w-1/2 text-center md:text-left">
+            <h1
+              data-node-id={`${agency.id}-trade-name`}
+              data-node-type="agency"
+              data-semantic-role="field"
+              data-concept-id="agency-trade-name"
+              data-content-kind="text"
+              data-content-source="fixture"
+              data-required="true"
+              className="text-3xl font-bold tracking-tight sm:text-4xl"
+            >
+              {agency.tradeName}
+            </h1>
+            <p
+              data-node-id={`${agency.id}-mission`}
+              data-node-type="agency"
+              data-semantic-role="field"
+              data-concept-id="agency-mission-statement"
+              data-content-kind="text"
+              data-content-source="cms"
+              data-required="true"
+              data-max-length="400"
+              className="text-lg leading-relaxed"
+            >
+              {agency.missionStatement}
+            </p>
+            <p
+              data-node-id={`${agency.id}-history`}
+              data-node-type="agency"
+              data-semantic-role="field"
+              data-concept-id="agency-history-narrative"
+              data-content-kind="text"
+              data-content-source="cms"
+              data-required="true"
+              data-max-length="600"
+              className="text-base leading-relaxed"
+            >
+              {agency.historyNarrative}
+            </p>
+            <p
+              data-node-id={`${agency.id}-founding-year`}
+              data-node-type="agency"
+              data-semantic-role="field"
+              data-concept-id="agency-founding-year"
+              data-content-kind="date"
+              data-content-source="fixture"
+              data-required="false"
+            >
+              Operando desde {agency.foundingYear}
+            </p>
+            <button
+              type="button"
+              data-node-id="action-navigate-search-from-intro-001"
+              data-node-type="agency"
+              data-semantic-role="action"
+              data-action-id="action-navigate-search-from-intro-001"
+              data-action-intent="navigate-search"
+              data-content-kind="action-label"
+              data-required="false"
+              className="mt-6 rounded bg-white px-4 py-2 font-semibold text-[#0047AB]"
+            >
+              Ver Propiedades
+            </button>
+          </div>
+          <img
+            src="/assets/Board.png"
+            alt="Historia"
+            className="w-full md:w-1/2 h-auto rounded-lg shadow-lg"
+          />
+        </div>
+      </div>
     </section>
   );
 }

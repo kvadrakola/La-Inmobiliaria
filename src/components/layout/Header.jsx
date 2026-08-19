@@ -4,47 +4,34 @@
  * Atomic Design: Layout organism
  * Uses W3C Design Tokens via CSS variables: var(--header-bg), var(--header-text)
  */
+import logo from '../img/logo.png';
+
 export default function Header() {
   return (
-    <header
-      className="w-full"
-      style={{
-        backgroundColor: 'var(--header-bg)',
-        color: 'var(--header-text)',
-      }}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        {/* Logo / Brand */}
-        <a href="/" className="text-xl font-bold tracking-tight">
+    <header className="site-header">
+      <div className="brand-logo">
+        <a href="/" className="brand-mark flex items-center gap-2">
+          <img src={logo} alt="Logo" className="h-12 w-12 rounded-sm" />
           HabitaFactoría
         </a>
-
-        {/* Navigation */}
-        <nav aria-label="Main navigation">
-          <ul className="flex gap-6">
-            <li>
-              <a href="/" className="text-sm font-medium transition-opacity hover:opacity-80">
-                Inicio
-              </a>
-            </li>
-            <li>
-              <a href="/properties" className="text-sm font-medium transition-opacity hover:opacity-80">
-                Propiedades
-              </a>
-            </li>
-            <li>
-              <a href="/about" className="text-sm font-medium transition-opacity hover:opacity-80">
-                Sobre Nosotros
-              </a>
-            </li>
-            <li>
-              <a href="/contact" className="text-sm font-medium transition-opacity hover:opacity-80">
-                Contacto
-              </a>
-            </li>
-          </ul>
-        </nav>
       </div>
+
+      <nav className="site-nav" aria-label="Main navigation">
+        <ul className="flex items-center gap-6">
+          <li>
+            <a href="/" className="nav-item">Inicio</a>
+          </li>
+          <li>
+            <a href="/properties" className="nav-item">Propiedades</a>
+          </li>
+          <li>
+            <a href="/about" className="nav-item">Sobre Nosotros</a>
+          </li>
+          <li>
+            <a href="/contact" className="nav-item">Contacto</a>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

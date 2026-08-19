@@ -46,34 +46,10 @@ function NavigationAction({ item }) {
   );
 }
 
-export function SiteHeader() {
-  return (
-    <header className="site-header">
-      <div className="brand-logo">
-        <BrandIdentityMark agency={agencyFixture} />
-      </div>
+import Header from '../../components/layout/Header.jsx';
 
-      <nav
-      className="site-nav"
-      aria-label="Navegación principal"
-      >
-        <ul
-          className="flex items-center gap-6"
-          data-node-id={siteNavigationFixture.id}
-          data-node-type="agency"
-          data-semantic-role="collection"
-          data-cardinality="4..4"
-          data-required="true"
-        >
-          {siteNavigationFixture.items.map((item) => (
-            <li key={item.id}>
-              <NavigationAction item={item} />
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
-  );
+export function SiteHeader() {
+  return <Header />;
 }
 
 function AgencyContactPoint({ agency }) {
