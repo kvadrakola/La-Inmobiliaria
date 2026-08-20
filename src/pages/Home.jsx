@@ -62,7 +62,7 @@ export default function Home() {
 
     const carouselTimer = window.setInterval(() => {
       setPropertySlide((currentSlide) => (currentSlide + 1) % propertySlideCount);
-    }, 10000);
+    }, 30000);
 
     return () => window.clearInterval(carouselTimer);
   }, [propertySlideCount]);
