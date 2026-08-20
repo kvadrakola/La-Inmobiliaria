@@ -62,6 +62,17 @@ function AgencyContactPoint({ agency }) {
       data-rel="belongs-to"
     >
       <p
+        data-node-id="agency-contact-point-001-trade-name"
+        data-node-type="contact-point"
+        data-semantic-role="field"
+        data-concept-id="agency-trade-name"
+        data-content-kind="text"
+        data-content-source="fixture"
+        data-required="true"
+      >
+        {agency.tradeName}
+      </p>
+      <p
         data-node-id="agency-contact-point-001-phone"
         data-node-type="contact-point"
         data-semantic-role="field"
@@ -184,10 +195,22 @@ function LegalDocumentCollection({ collection }) {
 export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <AgencyContactPoint agency={agencyFixture} />
-      <PaymentMethodAssertion payment={paymentMethodFixture} />
+      <div className="site-footer-grid">
+        <div className="site-footer-column">
+          <h3 className="site-footer-title">Contacto</h3>
+          <AgencyContactPoint agency={agencyFixture} />
+        </div>
+        <div className="site-footer-column">
+          <h3 className="site-footer-title">Métodos de Pago</h3>
+          <PaymentMethodAssertion payment={paymentMethodFixture} />
+        </div>
+        <div className="site-footer-column">
+          <h3 className="site-footer-title">Legal</h3>
+          <LegalDocumentCollection collection={legalDocumentCollectionFixture} />
+        </div>
+      </div>
+      <hr className="site-footer-divider" />
       <AgencyProfessionalCredential credential={agencyFixture.professionalCredential} />
-      <LegalDocumentCollection collection={legalDocumentCollectionFixture} />
     </footer>
   );
 }
