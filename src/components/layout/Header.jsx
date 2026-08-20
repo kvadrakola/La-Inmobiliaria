@@ -29,4 +29,8 @@ export default function Header() {
       </nav>
     </header>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 138bf7cefc787319becf3fc875d61629b574e52d
