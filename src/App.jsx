@@ -5,7 +5,16 @@
  * Pages are rendered by this wrapper.
  */
 import Home from './pages/Home.jsx';
+import Properties from './pages/Properties.jsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export default function App() {
-  return <Home />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/properties" element={<Properties />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }

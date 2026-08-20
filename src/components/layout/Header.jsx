@@ -4,6 +4,8 @@
  * Atomic Design: Layout organism
  * Uses W3C Design Tokens via CSS variables: var(--header-bg), var(--header-text)
  */
+import { Link } from 'react-router-dom';
+
 export default function Header() {
   return (
     <header
@@ -15,22 +17,22 @@ export default function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         {/* Logo / Brand */}
-        <a href="/" className="text-xl font-bold tracking-tight">
+        <Link to="/" className="text-xl font-bold tracking-tight">
           HabitaFactoría
-        </a>
+        </Link>
 
         {/* Navigation */}
         <nav aria-label="Main navigation">
           <ul className="flex gap-6">
             <li>
-              <a href="/" className="text-sm font-medium transition-opacity hover:opacity-80">
+              <Link to="/" className="text-sm font-medium transition-opacity hover:opacity-80">
                 Inicio
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/properties" className="text-sm font-medium transition-opacity hover:opacity-80">
+              <Link to="/properties" className="text-sm font-medium transition-opacity hover:opacity-80">
                 Propiedades
-              </a>
+              </Link>
             </li>
             <li>
               <a href="/about" className="text-sm font-medium transition-opacity hover:opacity-80">

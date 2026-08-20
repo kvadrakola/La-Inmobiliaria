@@ -11,9 +11,9 @@
  * Data is fetched from mockData. Replace with real API calls when backend is ready.
  */
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header.jsx';
 import Footer from '../components/layout/Footer.jsx';
-import Button from '../components/ui/Button.jsx';
 import AgentList from '../components/agents/AgentList.jsx';
 import PropertyList from '../components/properties/PropertyList.jsx';
 import { fetchAgents, fetchProperties } from '../data/mockData.js';
@@ -71,7 +71,9 @@ export default function Home() {
                 legal bajo la normativa <strong>RD 1312/2024</strong>.
               </p>
               <div className="mt-6">
-                <Button variant="primary">Ver Propiedades</Button>
+                <Link to="/properties" className="inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'var(--button-bg)' }}>
+                  Ver Propiedades
+                </Link>
               </div>
             </div>
           </div>
@@ -103,7 +105,9 @@ export default function Home() {
               error={propertiesError}
             />
             <div className="mt-10 text-center">
-              <Button variant="outline">Ver Todas las Propiedades</Button>
+              <Link to="/properties" className="inline-flex items-center justify-center rounded-md border-2 border-blue-600 bg-transparent px-5 py-2.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">
+                Ver Todas las Propiedades
+              </Link>
             </div>
           </div>
         </section>

@@ -25,6 +25,7 @@ export const fetchProperties = () => Promise.resolve([
     price: 450,
     imageUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop',
     badge: 'Gastos Incluidos',
+    amenities: ['Wifi incluido', 'Calefacción', 'Habitación amueblada', 'Limpieza semanal'],
   },
   {
     id: 2,
@@ -34,6 +35,7 @@ export const fetchProperties = () => Promise.resolve([
     imageUrl: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop',
     badge: 'Gastos Incluidos',
     petRestriction: '🐾 Prohibido Mascotas',
+    amenities: ['Cocina equipada', 'Cerca de universidad', 'Baño privado', 'Ascensor'],
   },
   {
     id: 3,
@@ -43,6 +45,7 @@ export const fetchProperties = () => Promise.resolve([
     imageUrl: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop',
     badge: 'Gastos Incluidos',
     smokingRestriction: '🚭 Prohibido Fumar',
+    amenities: ['Piso compartido', 'Ambiente internacional', 'Wifi incluido', 'Lavadora'],
   },
   {
     id: 4,
@@ -52,6 +55,7 @@ export const fetchProperties = () => Promise.resolve([
     imageUrl: 'public/img/room4.png',
     badge: 'Gastos Incluidos',
     smokingRestriction: '🚭 Prohibido Fumar',
+    amenities: ['Cerca del centro', 'Salón compartido', 'Calefacción', 'Amueblado'],
   },
     {
     id: 5,
@@ -61,6 +65,7 @@ export const fetchProperties = () => Promise.resolve([
     imageUrl: 'public/img/rooms5.png',
     badge: 'Gastos Incluidos',
     petRestriction: '🐾 Prohibido Mascotas',
+    amenities: ['Cerca de la estación', 'Habitación luminosa', 'Cocina equipada', 'Wifi incluido'],
   },
     {
     id: 6,
@@ -69,5 +74,6 @@ export const fetchProperties = () => Promise.resolve([
     price: 580,
     imageUrl: 'public/img/rooms6.png',
     badge: 'Gastos Incluidos',
+    amenities: ['Piso compartido', 'Terraza', 'Calefacción', 'Amueblado'],
   },
 ]);
