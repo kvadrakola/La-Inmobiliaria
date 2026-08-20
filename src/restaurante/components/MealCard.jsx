@@ -8,28 +8,15 @@ function MealCard({ meal }) {
   const quantity = item?.quantity ?? 0;
 
   return (
-    <div
-      className="overflow-hidden"
-      style={{
-        borderRadius: 'var(--radius-lg)',
-        border: '1px solid var(--color-border)',
-        backgroundColor: 'var(--color-bg-surface)',
-        boxShadow: 'var(--shadow-soft)',
-      }}
-    >
+    <div className="card overflow-hidden">
       <img
         src={strMealThumb}
         alt={strMeal}
         className="h-44 w-full rounded-t-xl object-cover"
       />
       <div className="p-4">
-        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-          #{idMeal}
-        </p>
-        <h3
-          className="line-clamp-2 text-base font-semibold"
-          style={{ color: 'var(--color-text-body)' }}
-        >
+        <p className="text-sm text-gray-500">#{idMeal}</p>
+        <h3 className="line-clamp-2 text-base font-semibold text-gray-900">
           {strMeal.replace(' Recipe', '')}
         </h3>
         <div className="mt-4 flex items-center justify-between">
@@ -37,35 +24,21 @@ function MealCard({ meal }) {
             <button
               type="button"
               onClick={() => removeItem(meal)}
-              className="rounded-md border px-3 py-1 disabled:opacity-40"
-              style={{
-                borderColor: 'var(--color-border)',
-                backgroundColor: 'var(--color-bg-surface)',
-                color: 'var(--color-text-body)',
-              }}
+              className="btn btn-secondary px-3 py-1 disabled:opacity-40"
               disabled={quantity === 0}
             >
               -
             </button>
-            <span className="text-sm font-medium" style={{ color: 'var(--color-text-body)' }}>
-              {quantity}
-            </span>
+            <span className="text-sm font-medium text-gray-900">{quantity}</span>
             <button
               type="button"
               onClick={() => addItem(meal)}
-              className="rounded-md border px-3 py-1"
-              style={{
-                borderColor: 'var(--color-border)',
-                backgroundColor: 'var(--color-bg-surface)',
-                color: 'var(--color-text-body)',
-              }}
+              className="btn btn-secondary px-3 py-1"
             >
               +
             </button>
           </div>
-          <span className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-            {UI.inCartLabel}
-          </span>
+          <span className="text-sm text-gray-500">{UI.inCartLabel}</span>
         </div>
       </div>
     </div>
