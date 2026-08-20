@@ -1,3 +1,4 @@
+/** @deprecated Replaced by src/semantic-graph/pages/HomeSceneGraph.jsx — not mounted from App. */
 /**
  * Home — Main landing page
  *
@@ -17,6 +18,7 @@ import Footer from '../components/layout/Footer.jsx';
 import AgentList from '../components/agents/AgentList.jsx';
 import PropertyList from '../components/properties/PropertyList.jsx';
 import { fetchAgents, fetchProperties } from '../data/mockData.js';
+import board from '../components/img/Board.png';
 
 export default function Home() {
   const [agents, setAgents] = useState([]);
@@ -57,24 +59,30 @@ export default function Home() {
 
       <main>
         {/* ═══ Agency History ═══ */}
-        <section className="bg-gray-50 px-4 py-16 sm:px-6 lg:px-8">
+        <section className="bg-[#0047AB] px-4 py-16 text-white sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mx-auto max-w-3xl text-center">
-              <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl"
-                  style={{ color: 'var(--color-primary)' }}>
-                HabitaFactoría
-              </h1>
-              <p className="text-lg leading-relaxed" style={{ color: 'var(--color-text-body)' }}>
-                Desde 2018, ayudamos a estudiantes a encontrar el hogar perfecto en Madrid.
-                Nuestra misión es ofrecer alquileres transparentes, sin comisiones ocultas,
-                con <strong>"Gastos Incluidos"</strong> y la tranquilidad de un contrato
-                legal bajo la normativa <strong>RD 1312/2024</strong>.
-              </p>
-              <div className="mt-6">
-                <Link to="/properties" className="inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'var(--button-bg)' }}>
-                  Ver Propiedades
-                </Link>
+            <div className="flex flex-col md:flex-row items-center gap-10">
+              <div className="w-full md:w-1/2 text-center md:text-left">
+                <h1 className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                  HabitaFactoría
+                </h1>
+                <p className="text-lg leading-relaxed text-white/95">
+                  Desde 2018, ayudamos a estudiantes a encontrar el hogar perfecto en Madrid.
+                  Nuestra misión es ofrecer alquileres transparentes, sin comisiones ocultas,
+                  con <strong>"Gastos Incluidos"</strong> y la tranquilidad de un contrato
+                  legal bajo la normativa <strong>RD 1312/2024</strong>.
+                </p>
+                <div className="mt-6">
+                  <Link to="/properties" className="inline-flex items-center justify-center rounded-md bg-white px-5 py-2.5 text-sm font-medium text-[#0047AB] transition-opacity hover:opacity-90">
+                    Ver Propiedades
+                  </Link>
+                </div>
               </div>
+              <img
+                src={board}
+                alt="Historia"
+                className="w-full md:w-1/2 h-auto rounded-lg shadow-lg"
+              />
             </div>
           </div>
         </section>

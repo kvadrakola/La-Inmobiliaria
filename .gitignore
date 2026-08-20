@@ -109,3 +109,6 @@ yarn-error.log*
 # Studio
 .cursor/
 CLAUDE.md
+
+# Local Notion migration scratch
+.notion-migrate/
