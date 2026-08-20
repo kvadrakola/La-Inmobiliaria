@@ -4,8 +4,26 @@
  * Pure routing/page composition layer.
  * Pages are rendered by this wrapper.
  */
-import Home from './pages/Home.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  HomeSceneGraph,
+  SearchSceneGraph,
+  DetailSceneGraph,
+  ContactSceneGraph,
+} from './semantic-graph';
+import { SemanticActionRouter } from './semantic-graph/SemanticActionRouter.jsx';
 
 export default function App() {
-  return <Home />;
+  return (
+    <BrowserRouter>
+      <SemanticActionRouter>
+        <Routes>
+          <Route path="/" element={<HomeSceneGraph />} />
+          <Route path="/buscar" element={<SearchSceneGraph />} />
+          <Route path="/propiedad/:propertyId" element={<DetailSceneGraph />} />
+          <Route path="/contacto" element={<ContactSceneGraph />} />
+        </Routes>
+      </SemanticActionRouter>
+    </BrowserRouter>
+  );
 }

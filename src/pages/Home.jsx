@@ -1,3 +1,4 @@
+/** @deprecated Replaced by src/semantic-graph/pages/HomeSceneGraph.jsx — not mounted from App. */
 /**
  * Home — Main landing page
  *
@@ -12,6 +13,7 @@ import Header from '../components/layout/Header.jsx';
 import Footer from '../components/layout/Footer.jsx';
 import Button from '../components/ui/Button.jsx';
 import Card from '../components/ui/Card.jsx';
+import board from '../components/img/Board.png';
 
 // ── Mock data (placeholder — will be replaced with API/backend) ─────
 const agents = [
@@ -53,20 +55,26 @@ export default function Home() {
         {/* ═══ Agency History ═══ */}
         <section className="bg-gray-50 px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mx-auto max-w-3xl text-center">
-              <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl"
-                  style={{ color: 'var(--color-primary)' }}>
-                HabitaFactoría
-              </h1>
-              <p className="text-lg leading-relaxed" style={{ color: 'var(--color-text-body)' }}>
-                Desde 2018, ayudamos a estudiantes a encontrar el hogar perfecto en Madrid.
-                Nuestra misión es ofrecer alquileres transparentes, sin comisiones ocultas,
-                con <strong>"Gastos Incluidos"</strong> y la tranquilidad de un contrato
-                legal bajo la normativa <strong>RD 1312/2024</strong>.
-              </p>
-              <div className="mt-6">
-                <Button variant="primary">Ver Propiedades</Button>
+            <div className="flex flex-col md:flex-row items-center gap-10">
+              <div className="w-full md:w-1/2 text-center md:text-left">
+                <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: 'var(--color-primary)' }}>
+                  HabitaFactoría
+                </h1>
+                <p className="text-lg leading-relaxed" style={{ color: 'var(--color-text-body)' }}>
+                  Desde 2018, ayudamos a estudiantes a encontrar el hogar perfecto en Madrid.
+                  Nuestra misión es ofrecer alquileres transparentes, sin comisiones ocultas,
+                  con <strong>"Gastos Incluidos"</strong> y la tranquilidad de un contrato
+                  legal bajo la normativa <strong>RD 1312/2024</strong>.
+                </p>
+                <div className="mt-6">
+                  <Button variant="primary">Ver Propiedades</Button>
+                </div>
               </div>
+              <img
+                src={board}
+                alt="Historia"
+                className="w-full md:w-1/2 h-auto rounded-lg shadow-lg"
+              />
             </div>
           </div>
         </section>
