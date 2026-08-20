@@ -3,34 +3,68 @@
  *
  * Atomic Design: Layout organism
  * Uses W3C Design Tokens via CSS variables: var(--header-bg), var(--header-text)
+ *
+ * SEMANTIC SCENE GRAPH — ZERO GEOMETRY
+ * Renders the agency brand mark and site navigation as semantic nodes
+ * (see SCENE_GRAPH_MANIFEST in src/semantic-graph/manifest.js).
  */
+import { agencyFixture, siteNavigationFixture } from '../../semantic-graph/fixtures.js';
+import logo from '../../img/logo.png';
+
+function BrandIdentityMark() {
+  return (
+    <a
+      href="/"
+      className="brand-mark flex items-center gap-2"
+      data-node-id={`${agencyFixture.id}-brand-mark`}
+      data-node-type="agency"
+      data-semantic-role="field"
+      data-concept-id="agency-trade-name"
+      data-content-kind="text"
+      data-content-source="fixture"
+      data-required="true"
+      data-ref={agencyFixture.id}
+      data-rel="belongs-to"
+    >
+      <img src={logo} alt="Logo HabitaFactoría" className="h-12 w-12 rounded-sm" />
+      {agencyFixture.tradeName}
+    </a>
+  );
+}
+
+function NavigationAction({ item }) {
+  return (
+    <a
+      href="#"
+      className="nav-item"
+      data-node-id={item.id}
+      data-node-type="agency"
+      data-semantic-role="action"
+      data-action-id={item.id}
+      data-action-intent={item.intent}
+      data-content-kind="action-label"
+    >
+      {item.label}
+    </a>
+  );
+}
+
 export default function Header() {
   return (
     <header className="site-header">
       <div className="brand-logo">
-        <a href="/" className="brand-mark flex items-center gap-2">
-          <img src="/ChatGPT_Image_29_jul_2026_13_12_20.png" alt="Logo" className="h-12 w-12 rounded-sm" />
-          HabitaFactoría
-        </a>
+        <BrandIdentityMark />
       </div>
 
       <nav className="site-nav" aria-label="Main navigation">
         <ul className="flex items-center gap-6">
-          <li>
-            <a href="/" className="nav-item">Inicio</a>
-          </li>
-          <li>
-            <a href="/buscar" className="nav-item">Propiedades</a>
-          </li>
-          <li>
-            <a href="/contacto" className="nav-item">Contacto</a>
-          </li>
+          {siteNavigationFixture.items.map((item) => (
+            <li key={item.id}>
+              <NavigationAction item={item} />
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 138bf7cefc787319becf3fc875d61629b574e52d
