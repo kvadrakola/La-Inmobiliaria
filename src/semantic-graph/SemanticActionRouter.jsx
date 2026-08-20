@@ -8,7 +8,13 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const NAVIGATION_INTENTS = new Set(['navigate-home', 'navigate-search', 'navigate-contact', 'expand-detail']);
+const NAVIGATION_INTENTS = new Set([
+  'navigate-home',
+  'navigate-search',
+  'navigate-contact',
+  'navigate-restaurant',
+  'expand-detail',
+]);
 
 function resolveNavigationTarget(intent, element) {
   switch (intent) {
@@ -18,6 +24,8 @@ function resolveNavigationTarget(intent, element) {
       return '/buscar';
     case 'navigate-contact':
       return '/contacto';
+    case 'navigate-restaurant':
+      return '/restaurante';
     case 'expand-detail': {
       const propertyId = element.getAttribute('data-ref');
       return propertyId ? `/propiedad/${propertyId}` : null;
