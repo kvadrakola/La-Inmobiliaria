@@ -12,8 +12,6 @@ function Header() {
       <nav className="site-nav" aria-label="Main navigation">
         <ul className="flex items-center gap-6">
           <li><a href="/" className="nav-item">Inicio</a></li>
-          <li><a href="/menu" className="nav-item">Menú</a></li>
-          <li><a href="/reservas" className="nav-item">Reservas</a></li>
           <li><a href="/contacto" className="nav-item">Contacto</a></li>
         </ul>
       </nav>
