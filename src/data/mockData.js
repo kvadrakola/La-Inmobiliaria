@@ -4,15 +4,19 @@
  * Replace this file with real API calls (fetch/axios) when the backend is ready.
  * Each exported function mimics an async API endpoint returning a Promise.
  */
+import { agentFixtures } from '../semantic-graph/fixtures.js';
 
 /**
  * @returns {Promise<Array>} List of agents
  */
-export const fetchAgents = () => Promise.resolve([
-  { id: 1, name: 'María García', role: 'Agente Senior', photo: 'https://i.pravatar.cc/150?img=1' },
-  { id: 2, name: 'Carlos López', role: 'Agente de Alquileres', photo: 'https://i.pravatar.cc/150?img=3' },
-  { id: 3, name: 'Ana Martínez', role: 'Asesora Estudiantil', photo: 'https://i.pravatar.cc/150?img=5' },
-]);
+export const fetchAgents = () => Promise.resolve(
+  agentFixtures.map((agent) => ({
+    id: agent.id,
+    name: agent.name,
+    role: agent.role,
+    photo: `/assets/${agent.portraitAssetId}`,
+  })),
+);
 
 /**
  * @returns {Promise<Array>} List of properties

@@ -1,4 +1,4 @@
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection {
+.team-member-collection {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: var(--spacing-6);
@@ -7,7 +7,7 @@
   padding: 24px clamp(16px, 4vw, 64px) clamp(48px, 7vw, 96px);
 }
 
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > h2 {
+.team-member-collection > h2 {
   grid-column: 1 / -1;
   margin: 0 0 var(--spacing-4);
   color: var(--color-text-body);
@@ -16,7 +16,7 @@
   text-align: center;
 }
 
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > article {
+.team-member-collection > article {
   grid-column: span 2;
   display: flex;
   width: min(100%, 18rem);
@@ -33,15 +33,15 @@
   overflow: hidden;
 }
 
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > article:nth-of-type(4) {
+.team-member-collection > article:nth-of-type(4) {
   grid-column: 2 / span 2;
 }
 
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > article:nth-of-type(5) {
+.team-member-collection > article:nth-of-type(5) {
   grid-column: 4 / span 2;
 }
 
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > article img {
+.team-member-collection > article img {
   display: block;
   width: 112px;
   height: 112px;
@@ -53,7 +53,7 @@
   border-radius: 9999px;
 }
 
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > article h3 {
+.team-member-collection > article h3 {
   margin: 0;
   color: var(--color-text-body);
   font-family: "sourcesanspro", sans-serif;
@@ -63,13 +63,13 @@
   text-align: center;
 }
 
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > article p {
+.team-member-collection > article p {
   margin: 0;
   color: var(--color-text-muted);
   line-height: 1.5;
 }
 
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > article p:first-of-type {
+.team-member-collection > article p:first-of-type {
   min-width: 108px;
   min-height: 23px;
   padding: 4px 8px;
@@ -83,7 +83,7 @@
   text-align: center;
 }
 
-[data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > article p:last-child {
+.team-member-collection > article p:last-child {
   width: 100%;
   margin-bottom: 0;
   font-family: "sourcesanspro", sans-serif;
@@ -93,11 +93,11 @@
 }
 
 @media (max-width: 640px) {
-  [data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection {
+  .team-member-collection {
     display: block;
   }
 
-  [data-scene-schema] > main > section[data-semantic-role="collection"].team-member-collection > article {
+  .team-member-collection > article {
     width: 100%;
     margin-bottom: var(--spacing-4);
   }

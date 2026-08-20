@@ -43,7 +43,7 @@ export default function AgentList({ agents = [], isLoading = false, error = null
 
   /* ── Success state ── */
   return (
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <section className="team-member-collection">
       {agents.map((agent) => (
         <AgentCard
           key={agent.id}
@@ -52,6 +52,6 @@ export default function AgentList({ agents = [], isLoading = false, error = null
           photo={agent.photo}
         />
       ))}
-    </div>
+    </section>
   );
 }
