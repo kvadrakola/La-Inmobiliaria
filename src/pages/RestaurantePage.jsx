@@ -9,7 +9,7 @@
  * - var(--color-border)
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { CartProvider } from '../restaurante/context/CartContext';
 import { useColombianMeals } from '../restaurante/hooks/useColombianMeals';
 import { useCartActions } from '../restaurante/hooks/useCartActions';
@@ -40,7 +40,10 @@ function Cart() {
     }
   }, [cart.items, totalItems, clearCart]);
 
-  if (totalItems === 0) {
+  const totalItemsMemo = useMemo(() => totalItems, [totalItems]);
+  const cartItemsMemo = useMemo(() => cart.items, [cart.items]);
+
+  if (totalItemsMemo === 0) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div
@@ -86,7 +89,7 @@ function Cart() {
           </button>
         </div>
         <ul className="mt-4 divide-y" style={{ borderColor: 'var(--color-border)' }}>
-          {cart.items.map((item) => (
+          {cartItemsMemo.map((item) => (
             <li key={item.idMeal} className="flex items-center justify-between py-3">
               <div>
                 <p className="text-sm font-medium" style={{ color: 'var(--color-text-body)' }}>
@@ -114,7 +117,7 @@ function Cart() {
             className="inline-flex w-full items-center justify-center rounded-lg px-4 py-2 text-white"
             style={{ backgroundColor: 'var(--color-primary)' }}
           >
-            {UI.confirmOrderLabel} ({totalItems})
+            {UI.confirmOrderLabel} ({totalItemsMemo})
           </button>
         </div>
       </div>
@@ -125,30 +128,6 @@ function Cart() {
 function RestaurantContent() {
   const { meals, loading, error } = useColombianMeals('Colombia');
 
-  if (loading) {
-    return (
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <p style={{ color: 'var(--color-text-muted)' }}>{UI.loadingMessage}</p>
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div
-          className="rounded-xl border p-6"
-          style={{
-            borderColor: 'var(--color-border)',
-            backgroundColor: 'var(--color-bg-surface)',
-          }}
-        >
-          <p className="text-red-600">Error: {error}</p>
-        </div>
-      </main>
-    );
-  }
-
   return (
     <>
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
@@ -157,7 +136,22 @@ function RestaurantContent() {
           <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
             {UI.pageDescription}
           </p>
+          <p className="mt-1 text-xs" style={{ color: 'var(--color-text-muted)' }}>
+            Estado: {loading ? 'cargando...' : error ? `error: ${error}` : `${meals.length} platos`}
+          </p>
         </header>
+
+        {!loading && !error && meals.length === 0 && (
+          <div
+            className="rounded-xl border p-6"
+            style={{
+              borderColor: 'var(--color-border)',
+              backgroundColor: 'var(--color-bg-surface)',
+            }}
+          >
+            <p style={{ color: 'var(--color-text-muted)' }}>No se encontraron platos.</p>
+          </div>
+        )}
 
         <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {meals.map((meal) => (
