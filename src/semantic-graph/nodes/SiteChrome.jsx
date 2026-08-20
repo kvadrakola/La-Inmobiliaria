@@ -118,25 +118,27 @@ function PaymentMethodAssertion({ payment }) {
       data-content-kind="text"
       data-content-source="fixture"
       data-required="true"
+      className="mt-3 space-y-2"
     >
-      <img
-        src={`/assets/${payment.bizumAssetId}.svg`}
-        alt="Método de pago Bizum aceptado"
-        data-node-id={payment.bizumAssetId}
-        data-node-type="media-asset"
+      <span
+        data-node-id={`${payment.id}-label`}
+        data-node-type="payment-method"
         data-semantic-role="field"
-        data-asset-id={payment.bizumAssetId}
-        data-asset-purpose="payment-method:bizum"
-        data-asset-required="true"
-        data-asset-alt-intent="Comunica que Bizum es un método de pago aceptado"
-        data-asset-fallback="show-text-label"
-      />
+        data-concept-id="payment-method-name"
+        data-content-kind="text"
+        data-content-source="fixture"
+        data-required="true"
+        className="inline-block rounded border border-gray-600 bg-[#eff6ff] px-2 py-0.5 text-xs font-semibold text-[#0047AB]"
+      >
+        Bizum
+      </span>
       <span
         data-node-id={`${payment.id}-policy-statement`}
         data-node-type="payment-method"
         data-semantic-role="status"
         data-concept-id="fee-transparency-policy"
         data-content-kind="status-label"
+        className="block text-sm"
       >
         {payment.policyStatement}
       </span>

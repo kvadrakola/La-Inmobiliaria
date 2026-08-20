@@ -29,11 +29,11 @@ export default function Footer()
 
           <div>
             <h3 className="text-sm font-bold text-white">Métodos de Pago</h3>
-            <div className="mt-3 flex items-center gap-2">
-              <span className="rounded border border-gray-600 bg-[#eff6ff] px-2 py-0.5 text-xs font-semibold text-[#0047AB]">
+            <div className="mt-3 space-y-2">
+              <span className="inline-block rounded border border-gray-600 bg-[#eff6ff] px-2 py-0.5 text-xs font-semibold text-[#0047AB]">
                 Bizum
               </span>
-              <span className="text-sm">Sin comisiones ocultas</span>
+              <p className="text-sm">Sin comisiones ocultas</p>
             </div>
           </div>
 
