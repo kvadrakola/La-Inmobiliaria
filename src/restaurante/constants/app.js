@@ -2,7 +2,14 @@ export const DEFAULT_COUNTRY = 'Colombia';
 
 export const API_BASE_URL = 'https://www.themealdb.com/api/json/v1/1';
 
-export const ORDERS_API_URL = (import.meta?.env?.VITE_ORDERS_API_URL || '/api/orders').trim();
+/**
+ * Backend real de pedidos de La-Inmobiliaria.
+ * Configurable por variable de entorno.
+ *
+ * Ejemplo .env:
+ * VITE_ORDERS_API_URL=https://api.lainmobiliaria.com/orders
+ */
+export const ORDERS_API_URL = (import.meta?.env?.VITE_ORDERS_API_URL || '').trim();
 
 export const UI = {
   pageTitle: 'Platos típicos de Colombia',

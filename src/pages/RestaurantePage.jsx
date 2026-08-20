@@ -1,15 +1,16 @@
 /**
  * RestaurantePage — Restaurant menu + cart page
  *
- * Adapted to La-Inmobiliaria stack:
- * - React 19
- * - Tailwind v4
- * - react-router-dom
- * - Shared header/footer from La-Inmobiliaria
+ * Styles unified with La-Inmobiliaria tokens:
+ * - var(--color-primary)
+ * - var(--color-text-body)
+ * - var(--color-text-muted)
+ * - var(--color-bg-surface)
+ * - var(--color-border)
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { CartProvider, useCart } from '../restaurante/context/CartContext';
+import { CartProvider } from '../restaurante/context/CartContext';
 import { useColombianMeals } from '../restaurante/hooks/useColombianMeals';
 import { useCartActions } from '../restaurante/hooks/useCartActions';
 import { submitOrder, getAxiosErrorMessage } from '../restaurante/api/restaurantApi';
@@ -42,8 +43,16 @@ function Cart() {
   if (totalItems === 0) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 text-center shadow-sm">
-          <p className="text-sm text-gray-500">{UI.cartEmptyMessage}</p>
+        <div
+          className="rounded-xl border p-6 text-center"
+          style={{
+            borderColor: 'var(--color-border)',
+            backgroundColor: 'var(--color-bg-surface)',
+          }}
+        >
+          <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+            {UI.cartEmptyMessage}
+          </p>
         </div>
       </div>
     );
@@ -51,9 +60,21 @@ function Cart() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div
+        className="rounded-xl border p-6"
+        style={{
+          borderColor: 'var(--color-border)',
+          backgroundColor: 'var(--color-bg-surface)',
+        }}
+      >
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-gray-900" style={{ fontSize: '20px' }}>
+          <h2
+            className="text-2xl font-bold"
+            style={{
+              fontSize: '20px',
+              color: 'var(--color-text-body)',
+            }}
+          >
             {UI.confirmOrderLabel}
           </h2>
           <button
@@ -64,28 +85,34 @@ function Cart() {
             {UI.clearCartLabel}
           </button>
         </div>
-        <ul className="mt-4 divide-y divide-gray-100">
+        <ul className="mt-4 divide-y" style={{ borderColor: 'var(--color-border)' }}>
           {cart.items.map((item) => (
             <li key={item.idMeal} className="flex items-center justify-between py-3">
               <div>
-                <p className="text-sm font-medium text-gray-900">{item.strMeal.replace(' Recipe', '')}</p>
-                <p className="text-xs text-gray-500">Cant: {item.quantity}</p>
+                <p className="text-sm font-medium" style={{ color: 'var(--color-text-body)' }}>
+                  {item.strMeal.replace(' Recipe', '')}
+                </p>
+                <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+                  Cant: {item.quantity}
+                </p>
               </div>
               <button
                 type="button"
                 onClick={() => removeItem(item)}
-                className="text-sm text-gray-500 hover:text-red-600"
+                className="text-sm hover:text-red-600"
+                style={{ color: 'var(--color-text-muted)' }}
               >
                 {UI.removeLabel}
               </button>
             </li>
           ))}
         </ul>
-        <div className="mt-4 border-t border-gray-100 pt-4">
+        <div className="mt-4 border-t pt-4" style={{ borderColor: 'var(--color-border)' }}>
           <button
             type="button"
             onClick={handleConfirm}
-            className="inline-flex w-full items-center justify-center rounded-lg bg-[#0047ab] px-4 py-2 text-white hover:bg-[#003b8e]"
+            className="inline-flex w-full items-center justify-center rounded-lg px-4 py-2 text-white"
+            style={{ backgroundColor: 'var(--color-primary)' }}
           >
             {UI.confirmOrderLabel} ({totalItems})
           </button>
@@ -101,7 +128,7 @@ function RestaurantContent() {
   if (loading) {
     return (
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <p className="text-gray-500">{UI.loadingMessage}</p>
+        <p style={{ color: 'var(--color-text-muted)' }}>{UI.loadingMessage}</p>
       </main>
     );
   }
@@ -109,7 +136,13 @@ function RestaurantContent() {
   if (error) {
     return (
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div
+          className="rounded-xl border p-6"
+          style={{
+            borderColor: 'var(--color-border)',
+            backgroundColor: 'var(--color-bg-surface)',
+          }}
+        >
           <p className="text-red-600">Error: {error}</p>
         </div>
       </main>
@@ -120,8 +153,10 @@ function RestaurantContent() {
     <>
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <header className="mb-10">
-          <h1 className="text-3xl font-bold text-gray-900">{UI.pageTitle}</h1>
-          <p className="mt-2 text-gray-500">{UI.pageDescription}</p>
+          <h1 style={{ color: 'var(--color-text-body)' }}>{UI.pageTitle}</h1>
+          <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
+            {UI.pageDescription}
+          </p>
         </header>
 
         <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

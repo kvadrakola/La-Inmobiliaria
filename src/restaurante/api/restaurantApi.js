@@ -16,7 +16,7 @@ export const getMealDetail = async (idMeal) => {
 };
 
 export const submitOrder = async (payload) => {
-  if (!ORDERS_API_URL || ORDERS_API_URL === '/api/orders') {
+  if (!ORDERS_API_URL) {
     return new Promise((resolve) => {
       setTimeout(() => {
         console.log('Pedido simulado:', payload);
