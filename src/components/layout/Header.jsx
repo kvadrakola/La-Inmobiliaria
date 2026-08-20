@@ -33,9 +33,20 @@ function BrandIdentityMark() {
 }
 
 function NavigationAction({ item }) {
+  const href =
+    item.intent === 'navigate-restaurant'
+      ? '/restaurante'
+      : item.intent === 'navigate-home'
+        ? '/'
+        : item.intent === 'navigate-search'
+          ? '/buscar'
+          : item.intent === 'navigate-contact'
+            ? '/contacto'
+            : '#';
+
   return (
     <a
-      href="#"
+      href={href}
       className="nav-item"
       data-node-id={item.id}
       data-node-type="agency"

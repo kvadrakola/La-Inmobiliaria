@@ -250,6 +250,7 @@ export const siteNavigationFixture = {
     { id: 'nav-action-search-001', label: 'Propiedades', intent: 'navigate-search' },
     { id: 'nav-action-about-001', label: 'Sobre Nosotros', intent: 'navigate-about' },
     { id: 'nav-action-contact-001', label: 'Contacto', intent: 'navigate-contact' },
+    { id: 'nav-action-restaurant-001', label: 'Restaurante', intent: 'navigate-restaurant' },
   ],
 };
 
