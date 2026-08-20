@@ -4,10 +4,10 @@
  * Atomic Design: Molecule
  * Uses W3C Design Tokens via CSS variables: var(--card-bg), var(--card-border), var(--card-radius)
  */
-export default function Card({ title, description, price, imageUrl, badge, className = '' }) {
+export default function Card({ title, description, price, imageUrl, badge, smokingRestriction, petRestriction, onDetails, isSelected = false, className = '' }) {
   return (
     <article
-      className={`overflow-hidden transition-shadow duration-200 hover:shadow-lg ${className}`}
+      className={`overflow-hidden transition-shadow duration-200 hover:shadow-lg ${isSelected ? 'ring-2 ring-blue-600' : ''} ${className}`}
       style={{
         backgroundColor: 'var(--card-bg)',
         border: '1px solid var(--card-border)',
@@ -28,12 +28,24 @@ export default function Card({ title, description, price, imageUrl, badge, class
 
       {/* Content */}
       <div className="p-4">
-        {/* Badge — e.g. "Gastos Incluidos" */}
-        {badge && (
-          <span className="mb-2 inline-block rounded bg-green-600 px-2 py-0.5 text-xs font-bold text-white">
-            {badge}
-          </span>
-        )}
+        {/* Badges — "Gastos Incluidos", "Prohibido Fumar" and "Prohibido Mascotas" */}
+        <div className="mb-2 flex flex-wrap gap-2">
+          {badge && (
+            <span className="inline-block rounded bg-green-600 px-5 py-0.5 text-xs font-bold text-white">
+              {badge}
+            </span>
+          )}
+          {smokingRestriction && (
+            <span className="inline-block rounded bg-red-600 px-5 py-0.5 text-xs font-bold text-white">
+              {smokingRestriction}
+            </span>
+          )}
+          {petRestriction && (
+            <span className="inline-block rounded bg-orange-600 px-5 py-0.5 text-xs font-bold text-white">
+              {petRestriction}
+            </span>
+          )}
+        </div>
 
         {/* Title */}
         <h3 className="mb-1 text-lg font-semibold" style={{ color: 'var(--color-text-body)' }}>
@@ -52,6 +64,16 @@ export default function Card({ title, description, price, imageUrl, badge, class
           <p className="text-base font-bold" style={{ color: 'var(--color-primary)' }}>
             {price} €/mes
           </p>
+        )}
+        {onDetails && (
+          <button
+            type="button"
+            onClick={onDetails}
+            className="mt-4 w-full rounded-md border-2 border-blue-600 px-4 py-2 text-sm font-semibold text-blue-600 transition-colors hover:bg-blue-50"
+            aria-expanded={isSelected}
+          >
+            {isSelected ? 'Detalles mostrados' : 'Ver más detalles'}
+          </button>
         )}
       </div>
     </article>

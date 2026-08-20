@@ -7,44 +7,7 @@
  * new entity each time. See root-level DOM-order contract comment in
  * ../pages/*.jsx for how source order should be interpreted downstream.
  */
-import { agencyFixture, siteNavigationFixture, legalDocumentCollectionFixture, paymentMethodFixture } from '../fixtures.js';
-
-function BrandIdentityMark({ agency }) {
-  return (
-    <a
-      href="/"
-      className="brand-mark"
-      data-node-id={`${agency.id}-brand-mark`}
-      data-node-type="agency"
-      data-semantic-role="field"
-      data-concept-id="agency-trade-name"
-      data-content-kind="text"
-      data-content-source="fixture"
-      data-required="true"
-      data-ref={agency.id}
-      data-rel="belongs-to"
-    >
-      {agency.tradeName}
-    </a>
-  );
-}
-
-function NavigationAction({ item }) {
-  return (
-    <a
-      href="#"
-      className="nav-item"
-      data-node-id={item.id}
-      data-node-type="agency"
-      data-semantic-role="action"
-      data-action-id={item.id}
-      data-action-intent={item.intent}
-      data-content-kind="action-label"
-    >
-      {item.label}
-    </a>
-  );
-}
+import { agencyFixture, legalDocumentCollectionFixture, paymentMethodFixture } from '../fixtures.js';
 
 import Header from '../../components/layout/Header.jsx';
 

@@ -23,16 +23,18 @@ export default function Footer()
             <h3 className="text-sm font-bold text-white">Contacto</h3>
             <p className="mt-3 font-semibold text-white">HabitaFactoría</p>
             <p className="mt-1 text-sm">+34 600 123 456</p>
-            <p className="text-sm text-blue-300">info@habitafactoria.es</p>
+            <p className="text-sm text-blue-300"><a href="mailto:info@habitafactoria.es" className="hover:text-white">
+              info@habitafactoria.es
+            </a></p>
             <p className="text-sm">Calle Ejemplo, 12, 3º B, Madrid</p>
           </div>
 
           <div>
             <h3 className="text-sm font-bold text-white">Métodos de Pago</h3>
             <div className="mt-3 space-y-2">
-              <span className="inline-block rounded border border-gray-600 bg-[#eff6ff] px-2 py-0.5 text-xs font-semibold text-[#0047AB]">
+                      <button type="button" className="rounded bg-blue-500 px-2 py-[0.5px] font-bold text-white hover:bg-blue-600">
                 Bizum
-              </span>
+              </button>
               <p className="text-sm">Sin comisiones ocultas</p>
             </div>
           </div>

@@ -10,11 +10,12 @@
  */
 import { agencyFixture, siteNavigationFixture } from '../../semantic-graph/fixtures.js';
 import logo from '../../img/logo.png';
+import { Link } from 'react-router-dom';
 
 function BrandIdentityMark() {
   return (
-    <a
-      href="/"
+    <Link
+      to="/"
       className="brand-mark flex items-center gap-2"
       data-node-id={`${agencyFixture.id}-brand-mark`}
       data-node-type="agency"
@@ -28,14 +29,14 @@ function BrandIdentityMark() {
     >
       <img src={logo} alt="Logo HabitaFactoría" className="h-12 w-12 rounded-sm" />
       {agencyFixture.tradeName}
-    </a>
+    </Link>
   );
 }
 
 function NavigationAction({ item }) {
   return (
-    <a
-      href="#"
+    <Link
+      to={item.intent === 'navigate-search' ? '/properties' : item.intent === 'navigate-contact' ? '/contact' : item.intent === 'navigate-about' ? '/about' : '/'}
       className="nav-item"
       data-node-id={item.id}
       data-node-type="agency"
@@ -45,7 +46,7 @@ function NavigationAction({ item }) {
       data-content-kind="action-label"
     >
       {item.label}
-    </a>
+    </Link>
   );
 }
 

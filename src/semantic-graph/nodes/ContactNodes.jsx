@@ -25,16 +25,6 @@ export function ContactForm() {
     setSubmitted(false);
   }
 
-  function toggleService(service) {
-    setForm((current) => ({
-      ...current,
-      services: current.services.includes(service)
-        ? current.services.filter((item) => item !== service)
-        : [...current.services, service],
-    }));
-    setSubmitted(false);
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
     setSubmitted(true);
