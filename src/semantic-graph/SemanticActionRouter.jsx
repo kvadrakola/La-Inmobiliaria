@@ -8,7 +8,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const NAVIGATION_INTENTS = new Set(['navigate-home', 'navigate-search', 'navigate-contact', 'expand-detail']);
+const NAVIGATION_INTENTS = new Set(['navigate-home', 'navigate-search', 'navigate-about', 'navigate-contact', 'expand-detail']);
 
 function resolveNavigationTarget(intent, element) {
   switch (intent) {
@@ -16,6 +16,8 @@ function resolveNavigationTarget(intent, element) {
       return '/';
     case 'navigate-search':
       return '/buscar';
+    case 'navigate-about':
+      return '/about';
     case 'navigate-contact':
       return '/contacto';
     case 'expand-detail': {
