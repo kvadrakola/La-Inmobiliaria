@@ -109,7 +109,7 @@ function TeamMemberProfile({ agent }) {
       data-rel="belongs-to"
     >
       <img
-        src={`/assets/${agent.portraitAssetId}.jpg`}
+        src={`/assets/${agent.portraitAssetId}`}
         alt={`Retrato profesional de ${agent.name}`}
         data-node-id={agent.portraitAssetId}
         data-node-type="media-asset"
@@ -158,9 +158,10 @@ function TeamMemberProfile({ agent }) {
   );
 }
 
-export function TeamMemberProfileCollection({ agents }) {
+export function TeamMemberProfileCollection({ agents, className = '' }) {
   return (
     <section
+      className={className}
       data-node-id="team-member-collection-001"
       data-node-type="agent"
       data-semantic-role="collection"

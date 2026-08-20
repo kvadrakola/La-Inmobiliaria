@@ -8,6 +8,7 @@ export { default as HomeSceneGraph } from './pages/HomeSceneGraph.jsx';
 export { default as SearchSceneGraph } from './pages/SearchSceneGraph.jsx';
 export { default as DetailSceneGraph } from './pages/DetailSceneGraph.jsx';
 export { default as ContactSceneGraph } from './pages/ContactSceneGraph.jsx';
+export { default as AboutSceneGraph } from './pages/AboutSceneGraph.jsx';
 export { SCENE_GRAPH_MANIFEST } from './manifest.js';
 export * from './fixtures.js';
 export * from './domainTypes.js';

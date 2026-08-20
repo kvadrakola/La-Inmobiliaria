@@ -10,6 +10,7 @@ import {
   SearchSceneGraph,
   DetailSceneGraph,
   ContactSceneGraph,
+  AboutSceneGraph,
 } from './semantic-graph';
 import { SemanticActionRouter } from './semantic-graph/SemanticActionRouter.jsx';
 
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/buscar" element={<SearchSceneGraph />} />
           <Route path="/propiedad/:propertyId" element={<DetailSceneGraph />} />
           <Route path="/contacto" element={<ContactSceneGraph />} />
+          <Route path="/about" element={<AboutSceneGraph />} />
         </Routes>
       </SemanticActionRouter>
     </BrowserRouter>
