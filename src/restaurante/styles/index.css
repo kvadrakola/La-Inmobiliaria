@@ -1,0 +1,124 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "./tokens.css";
+
+/* ═══════════════════════════════════════════════
+   Estilos base alineados al diseño Penpot
+   ═══════════════════════════════════════════════ */
+
+@layer base {
+  body {
+    font-family: 'sourcesanspro', 'Source Sans Pro', sans-serif;
+    background-color: #f9fafb;
+    color: #1a1a1a;
+  }
+}
+
+@layer components {
+  .site-header {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-inline-start: 48px;
+    padding-inline-end: 48px;
+    padding-block-start: 16px;
+    padding-block-end: 16px;
+    min-height: 77px;
+  }
+
+  .brand-mark {
+    color: #0047ab;
+    font-family: 'sourcesanspro', 'Source Sans Pro', sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav-item {
+    color: #000000;
+    font-family: 'sourcesanspro', 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+
+  .nav-item:hover {
+    color: #0047ab;
+  }
+
+  .page-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-inline-start: 48px;
+    padding-inline-end: 48px;
+    padding-block-start: 32px;
+    padding-block-end: 32px;
+  }
+
+  .card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px 0px #0047AB1F;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .btn-primary {
+    background-color: #0047ab;
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background-color: #003b8e;
+  }
+
+  .btn-secondary {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    border: 1px solid #e5e7eb;
+  }
+
+  .btn-secondary:hover {
+    background-color: #f3f4f6;
+  }
+
+  .section-title {
+    font-family: 'sourcesanspro', 'Source Sans Pro', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .section-subtitle {
+    font-family: 'sourcesanspro', 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    color: #6b7280;
+  }
+
+  .site-footer {
+    width: 100%;
+    background: #1f2937;
+    color: #d1d5db;
+    padding: 24px 48px;
+  }
+}

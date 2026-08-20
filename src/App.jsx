@@ -12,6 +12,7 @@ import {
   ContactSceneGraph,
 } from './semantic-graph';
 import { SemanticActionRouter } from './semantic-graph/SemanticActionRouter.jsx';
+import RestaurantePage from './pages/RestaurantePage';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/buscar" element={<SearchSceneGraph />} />
           <Route path="/propiedad/:propertyId" element={<DetailSceneGraph />} />
           <Route path="/contacto" element={<ContactSceneGraph />} />
+          <Route path="/restaurante" element={<RestaurantePage />} />
         </Routes>
       </SemanticActionRouter>
     </BrowserRouter>

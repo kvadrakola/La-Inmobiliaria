@@ -1,0 +1,32 @@
+/* ═══════════════════════════════════════════════
+   Design Tokens — Alineados a La-Inmobiliaria
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --color-blue-600: #0047AB;
+  --color-white: #FFFFFF;
+
+  --color-primary: var(--color-blue-600);
+  --color-accent: var(--color-white);
+  --color-text-on-primary: var(--color-white);
+  --color-text-body: #1a1a1a;
+  --color-text-muted: #6b7280;
+  --color-bg-body: #f9fafb;
+  --color-bg-surface: var(--color-white);
+  --color-border: #e5e7eb;
+
+  --button-bg: var(--color-primary);
+  --button-text: var(--color-text-on-primary);
+  --button-radius: 8px;
+  --card-bg: var(--color-bg-surface);
+  --card-border: var(--color-border);
+  --card-radius: 12px;
+  --header-bg: var(--color-primary);
+  --header-text: var(--color-accent);
+  --footer-bg: #1f2937;
+  --footer-text: #d1d5db;
+
+  --shadow-soft-sm: 0px 1px 3px 0px #0047AB1A;
+  --shadow-soft: 0px 4px 12px 0px #0047AB1F;
+  --shadow-soft-lg: 0px 8px 24px -4px #0047AB26;
+}
