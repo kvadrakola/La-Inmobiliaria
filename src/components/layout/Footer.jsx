@@ -32,7 +32,7 @@ export default function Footer()
           <div>
             <h3 className="text-sm font-bold text-white">Métodos de Pago</h3>
             <div className="mt-3 space-y-2">
-              <button type="button" className="rounded bg-blue-500 px-2 py-2 font-bold text-white hover:bg-blue-600">
+                      <button type="button" className="rounded bg-blue-500 px-2 py-[0.5px] font-bold text-white hover:bg-blue-600">
                 Bizum
               </button>
               <p className="text-sm">Sin comisiones ocultas</p>

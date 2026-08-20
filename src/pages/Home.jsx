@@ -28,6 +28,7 @@ export default function Home() {
   const [properties, setProperties] = useState([]);
   const [propertiesLoading, setPropertiesLoading] = useState(true);
   const [propertiesError, setPropertiesError] = useState(null);
+  const [propertySlide, setPropertySlide] = useState(0);
 
   useEffect(() => {
     fetchAgents()
@@ -45,6 +46,7 @@ export default function Home() {
     fetchProperties()
       .then((data) => {
         setProperties(data);
+        setPropertySlide(0);
         setPropertiesLoading(false);
       })
       .catch((err) => {
@@ -52,6 +54,20 @@ export default function Home() {
         setPropertiesLoading(false);
       });
   }, []);
+
+  const propertySlideCount = Math.max(1, Math.ceil(properties.length / 3));
+
+  useEffect(() => {
+    if (propertySlideCount <= 1) return undefined;
+
+    const carouselTimer = window.setInterval(() => {
+      setPropertySlide((currentSlide) => (currentSlide + 1) % propertySlideCount);
+    }, 10000);
+
+    return () => window.clearInterval(carouselTimer);
+  }, [propertySlideCount]);
+
+  const visibleProperties = properties.slice(propertySlide * 3, propertySlide * 3 + 3);
 
   return (
     <>
@@ -108,10 +124,42 @@ export default function Home() {
               Vitrina de Propiedades
             </h2>
             <PropertyList
-              properties={properties}
+              properties={visibleProperties}
               isLoading={propertiesLoading}
               error={propertiesError}
             />
+            {!propertiesLoading && !propertiesError && propertySlideCount > 1 && (
+              <div className="mt-8 flex items-center justify-center gap-4" aria-label="Carrusel de propiedades">
+                <button
+                  type="button"
+                  onClick={() => setPropertySlide((propertySlide - 1 + propertySlideCount) % propertySlideCount)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-600 text-xl text-blue-600 transition-colors hover:bg-blue-50"
+                  aria-label="Ver propiedades anteriores"
+                >
+                  &#8592;
+                </button>
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: propertySlideCount }, (_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => setPropertySlide(index)}
+                      className={`h-2.5 w-2.5 rounded-full transition-colors ${propertySlide === index ? 'bg-blue-600' : 'bg-gray-300'}`}
+                      aria-label={`Mostrar grupo de propiedades ${index + 1}`}
+                      aria-current={propertySlide === index ? 'true' : undefined}
+                    />
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setPropertySlide((propertySlide + 1) % propertySlideCount)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-600 text-xl text-blue-600 transition-colors hover:bg-blue-50"
+                  aria-label="Ver siguientes propiedades"
+                >
+                  &#8594;
+                </button>
+              </div>
+            )}
             <div className="mt-10 text-center">
               <Link to="/properties" className="inline-flex items-center justify-center rounded-md border-2 border-blue-600 bg-transparent px-5 py-2.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">
                 Ver Todas las Propiedades
