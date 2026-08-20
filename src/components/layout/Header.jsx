@@ -4,10 +4,6 @@
  * Atomic Design: Layout organism
  * Uses W3C Design Tokens via CSS variables: var(--header-bg), var(--header-text)
  */
-import logo from '../img/logo.png';
-
-export default function Header() {
-  return (
     <header className="site-header">
       <div className="brand-logo">
         <a href="/" className="brand-mark flex items-center gap-2">
@@ -33,5 +29,3 @@ export default function Header() {
         </ul>
       </nav>
     </header>
-  );
-}
