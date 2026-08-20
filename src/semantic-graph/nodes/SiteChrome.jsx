@@ -118,7 +118,7 @@ function PaymentMethodAssertion({ payment }) {
       data-content-kind="text"
       data-content-source="fixture"
       data-required="true"
-      className="mt-3 space-y-2"
+      className="mt-3 flex flex-col gap-2"
     >
       <span
         data-node-id={`${payment.id}-label`}
