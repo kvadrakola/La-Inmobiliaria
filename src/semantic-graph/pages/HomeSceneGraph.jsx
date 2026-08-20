@@ -14,6 +14,7 @@ import { SiteHeader, SiteFooter } from '../nodes/SiteChrome.jsx';
 import { AgencyIntroduction, TeamMemberProfileCollection } from '../nodes/AgencyNodes.jsx';
 import { FeaturedListingCollection } from '../nodes/SearchNodes.jsx';
 import { agencyFixture, agentFixtures, propertyFixtures } from '../fixtures.js';
+import '../../styles/agents.css';
 
 export default function HomeSceneGraph() {
   return (
@@ -28,7 +29,7 @@ export default function HomeSceneGraph() {
       <SiteHeader />
       <main>
         <AgencyIntroduction agency={agencyFixture} />
-        <TeamMemberProfileCollection agents={agentFixtures} />
+        <TeamMemberProfileCollection agents={agentFixtures} className="team-member-collection" />
         <FeaturedListingCollection properties={propertyFixtures} />
       </main>
       <SiteFooter />
