@@ -145,6 +145,33 @@ Los requisitos de transparencia del mercado español viven como **dato** (detall
 - etiqueta **«Gastos Incluidos»**
 - registros / licencia bajo **RD 1312/2024** (Ventanilla Única Digital) y DIA donde aplica
 
+## Diseño y tokens
+
+El diseño de referencia se realizó en Penpot con las escenas `home-page-001`, `search-page-001` y `detail-page-001` y el set `HabitaFactoría/Trust`.
+
+**[Abrir el archivo en Penpot](https://design.penpot.app/#/view?file-id=8694f143-a620-8054-8008-6790ee178f11&page-id=2be68822-842f-8175-8008-677e92a06f90&section=interactions&index=0&share-id=2be68822-842f-817f-8008-6796bd4d3f53)**
+
+## Capturas de la aplicación
+
+Estas capturas corresponden al frontend ejecutándose en local y muestran el estado actual de las vistas principales:
+
+| Inicio | Propiedades | Ficha de propiedad | Restaurante |
+| :---: | :---: | :---: | :---: |
+| ![Inicio de HabitaFactoría](src/img/screenshots/home.png) | ![Listado de propiedades](src/img/screenshots/properties.png) | ![Detalle de propiedad](src/img/screenshots/property-detail.png) | ![Restaurante](src/img/screenshots/restaurant.png) |
+
+| Sobre Nosotros | Contacto |
+| :---: | :---: |
+| ![Página Sobre Nosotros](src/img/screenshots/about.png) | ![Página de contacto](src/img/screenshots/contact.png) |
+
+Los tokens fuente están en `src/theme/` y el resultado generado en `src/styles/tokens.css`:
+
+```bash
+npm run build:tokens
+npm run build:tokens:vibrant
+```
+
+Ambos comandos sobrescriben `src/styles/tokens.css`. El tema `Trust` es el estado versionado por defecto.
+
 ## Scripts
 
 | Comando | Descripción |
