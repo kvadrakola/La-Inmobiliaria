@@ -10,10 +10,18 @@
  *
  * Responsive behavior: horizontal nav >= 768px; hamburger toggle + absolute
  * dropdown panel < 768px. Menu closes on route change (useLocation effect).
- * Navigation actions carry Lucide-style inline SVG icons (stroke 2, 24 grid):
- * Propiedades → House, Restaurante → UtensilsCrossed.
+ *
+ * Navigation actions carry Lucide icons (stroke 2, 24 grid):
+ * Propiedades → Building2, Restaurante → UtensilsCrossed.
+ *
+ * The two main business lines (Propiedades + Restaurante) are grouped into a
+ * visually distinct cluster so they read as the agency's core services,
+ * separated from the informational links (Inicio / Sobre Nosotros / Contacto).
+ * On mobile the cluster is rendered as a contained block so both items sit at
+ * the same indentation level (never parent/child).
  */
 import { useEffect, useState } from 'react';
+import { Building2, UtensilsCrossed } from 'lucide-react';
 import { agencyFixture, siteNavigationFixture } from '../../semantic-graph/fixtures.js';
 import logo from '../../img/logo.png';
 import { Link, useLocation } from 'react-router-dom';
@@ -28,9 +36,12 @@ const NAVIGATION_ROUTES = {
   'navigate-contact': '/contact',
 };
 
+/** Intents that belong to the core business-lines cluster (Propiedades + Restaurante). */
+const BUSINESS_CLUSTER_INTENTS = new Set(['navigate-search', 'navigate-restaurant']);
+
 const NAVIGATION_ICONS = {
-  'navigate-search': 'house',
-  'navigate-restaurant': 'utensils-crossed',
+  'navigate-search': Building2,
+  'navigate-restaurant': UtensilsCrossed,
 };
 
 function BrandIdentityMark() {
@@ -54,39 +65,14 @@ function BrandIdentityMark() {
   );
 }
 
-function NavigationIcon({ name }) {
-  if (name === 'house') {
-    return (
-      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M3 9.5 12 3l9 6.5" />
-        <path d="M5 10v10h14V10" />
-        <path d="M10 20v-6h4v6" />
-      </svg>
-    );
-  }
-
-  if (name === 'utensils-crossed') {
-    return (
-      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" />
-        <path d="M15 15 3.5 3.5a2.1 2.1 0 0 0-3 3L12 18" />
-        <path d="M5 19l14-14" />
-      </svg>
-    );
-  }
-
-  return null;
-}
-
 function NavigationAction({ item }) {
   const route = NAVIGATION_ROUTES[item.intent] ?? '/';
-  const iconName = NAVIGATION_ICONS[item.intent];
-  const className = item.dividerBefore ? 'nav-item nav-item--divider' : 'nav-item';
+  const Icon = NAVIGATION_ICONS[item.intent];
 
   return (
     <Link
       to={route}
-      className={className}
+      className="nav-item"
       data-node-id={item.id}
       data-node-type="agency"
       data-semantic-role="action"
@@ -94,7 +80,7 @@ function NavigationAction({ item }) {
       data-action-intent={item.intent}
       data-content-kind="action-label"
     >
-      {iconName ? <NavigationIcon name={iconName} /> : null}
+      {Icon ? <Icon size={17} strokeWidth={2} aria-hidden="true" /> : null}
       {item.label}
     </Link>
   );
@@ -135,6 +121,8 @@ export default function Header() {
   }, [location.pathname]);
 
   const navItems = siteNavigationFixture.items;
+  const businessItems = navItems.filter((item) => BUSINESS_CLUSTER_INTENTS.has(item.intent));
+  const infoItems = navItems.filter((item) => !BUSINESS_CLUSTER_INTENTS.has(item.intent));
 
   return (
     <header className="site-header">
@@ -144,11 +132,16 @@ export default function Header() {
 
       <nav className="site-nav" aria-label="Main navigation">
         <ul className="flex items-center gap-6">
-          {navItems.map((item) => (
+          {infoItems.map((item) => (
             <li key={item.id}>
               <NavigationAction item={item} />
             </li>
           ))}
+          <li className="nav-cluster" aria-label="Servicios principales">
+            {businessItems.map((item) => (
+              <NavigationAction key={item.id} item={item} />
+            ))}
+          </li>
         </ul>
       </nav>
 
@@ -163,11 +156,16 @@ export default function Header() {
         aria-label="Menú de navegación móvil"
       >
         <ul className="mobile-nav-list">
-          {navItems.map((item) => (
+          {infoItems.map((item) => (
             <li key={item.id}>
               <NavigationAction item={item} />
             </li>
           ))}
+          <li className="mobile-nav-cluster" aria-label="Servicios principales">
+            {businessItems.map((item) => (
+              <NavigationAction key={item.id} item={item} />
+            ))}
+          </li>
         </ul>
       </nav>
     </header>
