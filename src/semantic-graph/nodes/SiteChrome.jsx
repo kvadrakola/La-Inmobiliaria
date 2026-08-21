@@ -23,6 +23,7 @@ function AgencyContactPoint({ agency }) {
       data-semantic-role="entity"
       data-ref={agency.id}
       data-rel="belongs-to"
+      className="mt-3"
     >
       <p
         data-node-id="agency-contact-point-001-trade-name"
@@ -32,6 +33,7 @@ function AgencyContactPoint({ agency }) {
         data-content-kind="text"
         data-content-source="fixture"
         data-required="true"
+        className="font-semibold text-white"
       >
         {agency.tradeName}
       </p>
@@ -43,6 +45,7 @@ function AgencyContactPoint({ agency }) {
         data-content-kind="text"
         data-content-source="fixture"
         data-required="true"
+        className="mt-1 text-sm"
       >
         {agency.contactPhone}
       </p>
@@ -54,8 +57,11 @@ function AgencyContactPoint({ agency }) {
         data-content-kind="text"
         data-content-source="fixture"
         data-required="true"
+        className="text-sm text-blue-300"
       >
-        {agency.contactEmail}
+        <a href={`mailto:${agency.contactEmail}`} className="hover:text-white">
+          {agency.contactEmail}
+        </a>
       </p>
       <p
         data-node-id="agency-contact-point-001-address"
@@ -65,6 +71,7 @@ function AgencyContactPoint({ agency }) {
         data-content-kind="address"
         data-content-source="fixture"
         data-required="false"
+        className="text-sm"
       >
         {agency.address.streetAddress}, {agency.address.municipality}
       </p>
@@ -81,9 +88,10 @@ function PaymentMethodAssertion({ payment }) {
       data-content-kind="text"
       data-content-source="fixture"
       data-required="true"
-      className="mt-3 flex flex-col gap-2"
+      className="mt-3 space-y-2"
     >
-      <span
+      <button
+        type="button"
         data-node-id={`${payment.id}-label`}
         data-node-type="payment-method"
         data-semantic-role="field"
@@ -91,10 +99,10 @@ function PaymentMethodAssertion({ payment }) {
         data-content-kind="text"
         data-content-source="fixture"
         data-required="true"
-        className="inline-block rounded border border-gray-600 bg-[#eff6ff] px-2 py-0.5 text-xs font-semibold text-[#0047AB]"
+        className="rounded bg-blue-500 px-2 py-[0.5px] font-bold text-white hover:bg-blue-600"
       >
         Bizum
-      </span>
+      </button>
       <span
         data-node-id={`${payment.id}-policy-statement`}
         data-node-type="payment-method"
@@ -123,11 +131,17 @@ function AgencyProfessionalCredential({ credential }) {
       data-content-kind="text"
       data-content-source="fixture"
       data-required="true"
+      className="text-xs text-gray-500"
     >
       Registro de intermediación inmobiliaria (Ventanilla Única Digital): {credential.registrationNumber}
     </div>
   );
 }
+
+const LEGAL_DOCUMENT_ROUTES = {
+  'action-view-privacy-001': '/privacidad',
+  'action-view-terms-001': '/terminos',
+};
 
 function LegalDocumentCollection({ collection }) {
   return (
@@ -137,17 +151,19 @@ function LegalDocumentCollection({ collection }) {
       data-semantic-role="collection"
       data-cardinality="1..6"
       data-required="true"
+      className="mt-3 space-y-1 text-sm"
     >
       {collection.items.map((item) => (
         <li key={item.id}>
           <a
-            href="#"
+            href={LEGAL_DOCUMENT_ROUTES[item.id] ?? '#'}
             data-node-id={item.id}
             data-node-type="compliance-record"
             data-semantic-role="action"
             data-action-id={item.id}
             data-action-intent="view-legal-document"
             data-content-kind="action-label"
+            className="hover:text-white"
           >
             {item.label}
           </a>
@@ -159,23 +175,27 @@ function LegalDocumentCollection({ collection }) {
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer">
-      <div className="site-footer-grid">
-        <div className="site-footer-column">
-          <h3 className="site-footer-title">Contacto</h3>
-          <AgencyContactPoint agency={agencyFixture} />
+    <footer className="w-full bg-[#1f2937] text-gray-300">
+      <div className="mx-auto max-w-[1280px] px-6 py-12">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+          <div>
+            <h3 className="text-sm font-bold text-white">Contacto</h3>
+            <AgencyContactPoint agency={agencyFixture} />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-white">Métodos de Pago</h3>
+            <PaymentMethodAssertion payment={paymentMethodFixture} />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-white">Legal</h3>
+            <LegalDocumentCollection collection={legalDocumentCollectionFixture} />
+          </div>
         </div>
-        <div className="site-footer-column">
-          <h3 className="site-footer-title">Métodos de Pago</h3>
-          <PaymentMethodAssertion payment={paymentMethodFixture} />
-        </div>
-        <div className="site-footer-column">
-          <h3 className="site-footer-title">Legal</h3>
-          <LegalDocumentCollection collection={legalDocumentCollectionFixture} />
-        </div>
+
+        <hr className="my-8 border-gray-700" />
+
+        <AgencyProfessionalCredential credential={agencyFixture.professionalCredential} />
       </div>
-      <hr className="site-footer-divider" />
-      <AgencyProfessionalCredential credential={agencyFixture.professionalCredential} />
     </footer>
   );
 }
