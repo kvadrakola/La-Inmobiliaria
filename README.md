@@ -1,6 +1,6 @@
 # HabitaFactoría
 
-Aplicación web de HabitaFactoría, una inmobiliaria ficticia orientada al alquiler de habitaciones y pisos compartidos para estudiantes en España. El proyecto combina un portal inmobiliario con una experiencia de restaurante de demostración accesible desde la navegación principal.
+Portal de alquiler de vivienda para estudiantes en España. La app es un **híbrido**: inicio y búsqueda son páginas React clásicas; detalle, about y contacto se montan como **Semantic Scene Graph**. En el grafo, React describe *qué es* cada nodo (`data-*`), no solo cómo se ve. El diseño visual se generó en Penpot a partir de ese grafo y los tokens W3C del proyecto.
 
 El frontend está construido con React y Vite. La parte inmobiliaria activa usa un **Semantic Scene Graph** con filosofía **Zero-Geometry**: los componentes describen qué representa cada elemento mediante atributos `data-*`, mientras que la geometría y la presentación viven en CSS/Tailwind.
 
@@ -10,7 +10,12 @@ El frontend está construido con React y Vite. La parte inmobiliaria activa usa 
 
 El repositorio contiene un prototipo funcional de frontend, con navegación, vistas responsive, datos de prueba y estados de carga/error. No existe todavía un backend inmobiliario conectado: las propiedades y los datos de agencia proceden de fixtures locales. El pedido del restaurante se simula si no se configura una API propia.
 
-## Funcionalidades
+- **React 19** + **Vite**, con **React Compiler** (`babel-plugin-react-compiler`)
+- **React Router 7** — rutas definidas en [`src/App.jsx`](src/App.jsx)
+- **Tailwind CSS 4** — layout y chrome; tokens W3C vía CSS variables
+- **Style Dictionary** — tokens W3C (`trust` / `vibrant`) → `src/styles/tokens.css`
+- **Lucide React** — iconos de navegación
+- **Axios** — menú del mini-app Restaurante (TheMealDB)
 
 ### Portal inmobiliario
 
@@ -81,125 +86,64 @@ npm run build
 npm run preview
 ```
 
-La build se genera en `dist/`.
-
 ## Rutas
 
-| Ruta | Vista | Estado |
-| --- | --- | --- |
-| `/` | Inicio semántico: agencia, equipo y propiedades destacadas | Activa |
-| `/buscar` | Resultados de búsqueda con criterios y tres fixtures inmobiliarios | Activa |
-| `/properties` | Alias del listado de propiedades clásico | Activa |
-| `/propiedad/:propertyId` | Ficha completa; admite ids semánticos y ids de listings | Activa |
-| `/about` | Historia de la agencia y equipo | Activa |
-| `/contacto` | Formulario de contacto | Activa |
-| `/restaurante` | Menú colombiano y carrito de pedidos | Activa |
+Montadas en [`src/App.jsx`](src/App.jsx). Toda la app va envuelta en [`SemanticActionRouter`](src/semantic-graph/SemanticActionRouter.jsx), que resuelve clics con `data-action-intent`.
 
-El `SemanticActionRouter` traduce los intents `data-action-intent` a rutas. Acciones como «Ver Propiedades» pueden ser botones semánticos sin acoplar la navegación al marcado visual.
+| Ruta | Página montada |
+| --- | --- |
+| `/` | `Home` — historia, equipo, vitrina |
+| `/buscar` | `Properties` — listado completo |
+| `/properties` | Alias de `/buscar` |
+| `/propiedad/:propertyId` | `DetailSceneGraph` — ficha (`listing-N` o `property-00N`) |
+| `/contacto` | `ContactSceneGraph` |
+| `/about` | `AboutSceneGraph` |
+| `/restaurante` | Mini-app de menú colombiano |
 
-## Arquitectura
+`HomeSceneGraph` y `SearchSceneGraph` existen en `src/semantic-graph/pages/` (versión Zero-Geometry de inicio y búsqueda) pero **no están conectadas** al router.
 
-```text
+## Estructura
+
+```
 src/
-├── App.jsx                         # BrowserRouter y tabla de rutas
-├── main.jsx                        # Punto de entrada y hojas globales
-├── components/                     # Componentes clásicos reutilizables
-│   ├── agents/                     # Tarjetas y listas de agentes
-│   ├── layout/                     # Header y Footer
-│   ├── properties/                 # PropertyList
-│   └── ui/                         # Button y Card
-├── data/mockData.js                # Datos mock de la implementación clásica
-├── pages/                          # Home, Properties y RestaurantePage
-├── restaurante/                    # API, carrito, hooks, componentes y estilos
-├── semantic-graph/                 # Capa semántica activa del portal
-│   ├── domainTypes.js              # Contratos JSDoc y vocabularios cerrados
-│   ├── fixtures.js                 # Agencia, equipo, propiedades y criterios
-│   ├── manifest.js                  # Índice de nodos y relaciones
-│   ├── propertyCatalog.js           # Lookup y adaptación de listings clásicos
-│   ├── SemanticActionRouter.jsx     # Delegación de navegación por intents
-│   ├── nodes/                       # Agencia, propiedades, búsqueda y chrome
-│   └── pages/                       # Home, búsqueda, detalle, about y contacto
-├── styles/                         # CSS global, tokens, equipo y detalle
-└── theme/                          # Fuentes JSON de Trust y Vibrant
+├── App.jsx                     # rutas montadas
+├── pages/
+│   ├── Home.jsx                # /  (HEADER / MAIN / FOOTER)
+│   ├── Properties.jsx          # /buscar y /properties
+│   └── RestaurantePage.jsx     # /restaurante
+├── data/
+│   └── mockData.js             # 12 anuncios mock + fetchProperties
+├── components/
+│   ├── layout/Header.jsx       # chrome de navegación
+│   ├── layout/Footer.jsx       # footer de Home y Properties
+│   ├── properties/             # PropertyList
+│   ├── agents/                 # AgentCard / AgentList
+│   └── ui/                     # Button, Card
+├── restaurante/                # cart, API meals, estilos propios
+├── styles/                     # tokens, header, team, detail, about
+├── theme/                      # theme-trust.json / theme-vibrant.json
+└── semantic-graph/
+    ├── domainTypes.js          # formas de datos (JSDoc)
+    ├── fixtures.js             # agencia, agentes, 3 propiedades semánticas
+    ├── propertyCatalog.js      # fixtures + anuncios mock, lookup por id
+    ├── manifest.js             # índice del grafo (nodos + relaciones)
+    ├── SemanticActionRouter.jsx
+    ├── nodes/                  # Property, Agency, Search, Contact, SiteChrome
+    └── pages/                  # Detail / Contact / About (montadas)
+                                # Home / Search (sin montar)
 ```
 
-### Semantic Scene Graph
+Datos de anuncios de inicio y búsqueda: [`src/data/mockData.js`](src/data/mockData.js). `propertyCatalog` los adapta al shape semántico para la ficha. `fixtures.js` cubre agencia, equipo y tres listings del grafo.
+
+Cada página montada cumple **HEADER / MAIN / FOOTER**. Inicio y búsqueda usan `Header` + `Footer`; las escenas semánticas usan `SiteHeader` + `SiteFooter` (el header es el mismo componente).
 
 La capa `src/semantic-graph` mantiene una representación semántica de los contenidos inmobiliarios:
 
-- `fixtures.js` contiene la agencia, cinco agentes, tres propiedades, navegación, pagos, documentos y criterios de búsqueda.
-- `domainTypes.js` documenta con JSDoc `Property`, `Agency`, `Agent`, direcciones, precios, comodidades y compliance.
-- `PropertyListing` se renderiza en tres profundidades: `teaser` en inicio, `summary` en resultados y `complete` en detalle.
-- `manifest.js` indexa nodos y relaciones `data-ref`/`data-rel`.
-- `propertyCatalog.js` adapta los doce listings de `mockData.js` al contrato semántico.
-- Los atributos `data-record-status="fixture"` y `data-verification-status="unverified"` indican que la información legal es demostrativa y no una certificación real.
+Los requisitos de transparencia del mercado español viven como **dato** (detalle en Notion):
 
-## Datos y APIs
-
-### Propiedades
-
-El portal no consume todavía un backend inmobiliario:
-
-- `src/semantic-graph/fixtures.js`: tres propiedades ricas (`property-001` a `property-003`).
-- `src/data/mockData.js`: doce listings clásicos recuperados por `fetchProperties()` como una `Promise` simulada.
-
-`propertyCatalog.js` unifica ambas fuentes para las fichas de detalle. Las imágenes de los tres primeros listings usan URLs de Unsplash y las demás se sirven desde `public/img`.
-
-### TheMealDB
-
-El menú se consulta en:
-
-```text
-GET https://www.themealdb.com/api/json/v1/1/filter.php?a=Colombia
-```
-
-La implementación activa usa `restaurantApi.js` y Axios. `theMealDb.js` conserva una implementación alternativa basada en `fetch`.
-
-### Pedidos
-
-Sin configuración adicional, `submitOrder()` espera 400 ms y devuelve un pedido simulado en consola. Para usar un backend real, crea `.env.local` con:
-
-```env
-VITE_ORDERS_API_URL=https://tu-api.example/orders
-```
-
-La aplicación enviará un `POST` JSON con esta forma:
-
-```json
-{
-  "items": [
-    { "idMeal": "12345", "name": "Nombre del plato", "quantity": 1 }
-  ],
-  "totalItems": 1
-}
-```
-
-## Diseño y tokens
-
-El diseño de referencia se realizó en Penpot con las escenas `home-page-001`, `search-page-001` y `detail-page-001` y el set `HabitaFactoría/Trust`.
-
-**[Abrir el archivo en Penpot](https://design.penpot.app/#/view?file-id=8694f143-a620-8054-8008-6790ee178f11&page-id=2be68822-842f-8175-8008-677e92a06f90&section=interactions&index=0&share-id=2be68822-842f-817f-8008-6796bd4d3f53)**
-
-## Capturas de la aplicación
-
-Estas capturas corresponden al frontend ejecutándose en local y muestran el estado actual de las vistas principales:
-
-| Inicio | Propiedades | Ficha de propiedad | Restaurante |
-| :---: | :---: | :---: | :---: |
-| ![Inicio de HabitaFactoría](src/img/screenshots/home.png) | ![Listado de propiedades](src/img/screenshots/properties.png) | ![Detalle de propiedad](src/img/screenshots/property-detail.png) | ![Restaurante](src/img/screenshots/restaurant.png) |
-
-| Sobre Nosotros | Contacto |
-| :---: | :---: |
-| ![Página Sobre Nosotros](src/img/screenshots/about.png) | ![Página de contacto](src/img/screenshots/contact.png) |
-
-Los tokens fuente están en `src/theme/` y el resultado generado en `src/styles/tokens.css`:
-
-```bash
-npm run build:tokens
-npm run build:tokens:vibrant
-```
-
-Ambos comandos sobrescriben `src/styles/tokens.css`. El tema `Trust` es el estado versionado por defecto.
+- **Bizum** como señal de confianza
+- etiqueta **«Gastos Incluidos»**
+- registros / licencia bajo **RD 1312/2024** (Ventanilla Única Digital) y DIA donde aplica
 
 ## Scripts
 
