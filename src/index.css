@@ -1,6 +1,264 @@
 @import "tailwindcss";
 @import "./styles/tokens.css";
 
+:root {
+   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+   color: var(--color-text-body);
+   background-color: var(--color-bg-body);
+   font-synthesis: none;
+   text-rendering: optimizeLegibility;
+}
+
+* {
+   box-sizing: border-box;
+}
+
+body {
+   min-width: 320px;
+   min-height: 100vh;
+   margin: 0;
+   background-color: var(--color-bg-body);
+}
+
+.site-header {
+   position: relative;
+   z-index: 10;
+   display: flex;
+   width: 100%;
+   min-height: 77px;
+   align-items: center;
+   justify-content: space-between;
+   gap: 24px;
+   padding: 16px clamp(16px, 4vw, 48px);
+   overflow: hidden;
+   background: #ffffff;
+   border: 1px solid #e5e7eb;
+}
+
+.brand-logo,
+.brand-mark,
+.site-nav,
+.site-nav ul {
+   display: flex;
+   align-items: center;
+}
+
+.brand-logo,
+.site-nav {
+   flex-shrink: 0;
+}
+
+.brand-mark {
+   gap: 10px;
+   color: #0047ab;
+   font-family: 'Source Sans Pro', ui-sans-serif, sans-serif;
+   font-size: 21px;
+   font-weight: 700;
+   text-decoration: none;
+   white-space: nowrap;
+}
+
+.brand-mark img {
+   display: block;
+   width: 48px;
+   height: 48px;
+   object-fit: contain;
+}
+
+.site-nav ul {
+   gap: 24px;
+   padding: 0;
+   margin: 0;
+   list-style: none;
+}
+
+.nav-item {
+   color: #000000;
+   font-family: 'Source Sans Pro', ui-sans-serif, sans-serif;
+   font-size: 14px;
+   font-weight: 700;
+   text-decoration: none;
+   white-space: nowrap;
+   transition: color 0.2s ease;
+}
+
+.nav-item:hover,
+.nav-item:focus-visible {
+   color: #0047ab;
+}
+
+main img {
+   display: block;
+   max-width: 100%;
+}
+
+@media (max-width: 640px) {
+   .site-header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 12px;
+   }
+
+   .site-nav {
+      width: 100%;
+      overflow-x: auto;
+   }
+
+   .site-nav ul {
+      gap: 16px;
+   }
+}
+
+[data-scene-schema] {
+   min-height: 100vh;
+}
+
+[data-scene-schema] > header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: var(--spacing-6);
+   padding: var(--spacing-4) clamp(var(--spacing-4), 4vw, var(--spacing-16));
+   color: var(--header-text);
+   background-color: var(--header-bg);
+}
+
+[data-scene-schema] > header > a {
+   font-size: 1.25rem;
+   font-weight: 800;
+   text-decoration: none;
+}
+
+[data-scene-schema] > header nav ul,
+[data-scene-schema] > footer ul {
+   display: flex;
+   flex-wrap: wrap;
+   gap: var(--spacing-4);
+   padding: 0;
+   margin: 0;
+   list-style: none;
+}
+
+[data-scene-schema] > header nav a {
+   color: inherit;
+   font-size: 0.9rem;
+   font-weight: 600;
+   text-decoration: none;
+   opacity: 0.9;
+}
+
+[data-scene-schema] > header nav a:hover,
+[data-scene-schema] > header nav a:focus-visible {
+   opacity: 1;
+}
+
+[data-scene-schema] > main > section {
+   padding: clamp(var(--spacing-12), 7vw, 96px) clamp(var(--spacing-4), 4vw, var(--spacing-16));
+}
+
+[data-scene-schema] > main > section[data-node-type="agency"] {
+   color: var(--color-text-on-primary);
+   text-align: center;
+   background-color: var(--color-primary);
+}
+
+[data-scene-schema] > main > section[data-node-type="agency"] > * {
+   width: min(100%, 52rem);
+   margin-right: auto;
+   margin-left: auto;
+}
+
+[data-scene-schema] h1,
+[data-scene-schema] h2,
+[data-scene-schema] h3 {
+   line-height: 1.15;
+}
+
+[data-scene-schema] h1 {
+   font-size: clamp(2rem, 5vw, 3.75rem);
+}
+
+[data-scene-schema] h2 {
+   margin-bottom: var(--spacing-8);
+   font-size: clamp(1.6rem, 3vw, 2.25rem);
+   text-align: center;
+}
+
+[data-scene-schema] > main > section[data-semantic-role="collection"] {
+   width: min(100%, 80rem);
+   margin: 0 auto;
+}
+
+[data-scene-schema] > main > section[data-semantic-role="collection"] > article {
+   display: inline-flex;
+   width: min(100%, 24rem);
+   margin: var(--spacing-3);
+   padding: var(--spacing-5);
+   vertical-align: top;
+   flex-direction: column;
+   border: 1px solid var(--card-border);
+   border-radius: var(--card-radius);
+   background-color: var(--card-bg);
+   box-shadow: var(--shadow-soft);
+}
+
+[data-scene-schema] article img {
+   width: 100%;
+   height: 12rem;
+   object-fit: cover;
+   border-radius: var(--radius-md);
+}
+
+[data-scene-schema] button {
+   padding: var(--spacing-3) var(--spacing-5);
+   border: 0;
+   border-radius: var(--button-radius);
+   color: var(--button-text);
+   background-color: var(--button-bg);
+   font: inherit;
+   font-weight: 700;
+   cursor: pointer;
+}
+
+[data-scene-schema] button:hover,
+[data-scene-schema] button:focus-visible {
+   filter: brightness(0.9);
+}
+
+[data-scene-schema] > footer {
+   display: grid;
+   gap: var(--spacing-4);
+   padding: var(--spacing-10) clamp(var(--spacing-4), 4vw, var(--spacing-16));
+   color: var(--footer-text);
+   background-color: var(--footer-bg);
+}
+
+[data-scene-schema] > footer > address {
+   font-style: normal;
+}
+
+[data-scene-schema] > footer > div {
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   gap: var(--spacing-3) var(--spacing-6);
+}
+
+@media (max-width: 640px) {
+   [data-scene-schema] > header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--spacing-3);
+   }
+
+   [data-scene-schema] > main > section[data-semantic-role="collection"] > article {
+      display: flex;
+      width: 100%;
+      margin: 0 0 var(--spacing-4);
+   }
+
+}
+
 /* Tailwind v4 uses @import "tailwindcss" as the single entry point.
    Design tokens are auto-generated from W3C JSON via Style Dictionary.
    Source of truth: src/theme/theme-trust.json (or theme-vibrant.json).

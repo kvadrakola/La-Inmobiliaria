@@ -58,6 +58,8 @@ export default function PropertyList({ properties = [], isLoading = false, error
           price={property.price}
           imageUrl={property.imageUrl}
           badge={property.badge}
+          smokingRestriction={property.smokingRestriction}
+          petRestriction={property.petRestriction}
         />
       ))}
     </div>

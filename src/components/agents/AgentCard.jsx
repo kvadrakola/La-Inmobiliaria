@@ -6,7 +6,7 @@
  */
 export default function AgentCard({ name, role, photo, className = '' }) {
   return (
-    <div className={`flex flex-col items-center text-center ${className}`}>
+    <article className={className}>
       <img
         src={photo}
         alt={name}
@@ -19,6 +19,6 @@ export default function AgentCard({ name, role, photo, className = '' }) {
       <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
         {role}
       </p>
-    </div>
+    </article>
   );
 }
