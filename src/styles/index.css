@@ -9,7 +9,8 @@
   width: 100%;
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  overflow: hidden;
+  /* overflow visible so the absolute mobile dropdown panel is not clipped */
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -47,6 +48,9 @@
 }
 
 .nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: #000000;
   font-family: 'sourcesanspro', 'Source Sans Pro', sans-serif;
   font-size: 14px;
@@ -56,8 +60,98 @@
   transition: color 0.2s ease;
 }
 
+.nav-item svg {
+  flex-shrink: 0;
+}
+
 .nav-item:hover {
   color: #0047ab;
+}
+
+/* Visual separation between main business (Propiedades) and the separate
+   company line (Restaurante): a subtle vertical divider on desktop. */
+.nav-item--divider {
+  border-left: 1px solid #d1d5db;
+  padding-left: 24px;
+}
+
+/* ─── Mobile navigation (hamburger) ─── */
+.mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+.mobile-nav-toggle:hover,
+.mobile-nav-toggle:focus-visible {
+  color: #0047ab;
+  outline: none;
+}
+
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 16px 48px;
+}
+
+.mobile-nav.is-open {
+  display: block;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav .nav-item {
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  padding-block: 4px;
+}
+
+@media (max-width: 767px) {
+  .site-header {
+    padding-inline-start: 16px;
+    padding-inline-end: 16px;
+    gap: 12px;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+  }
+
+  .mobile-nav {
+    padding-inline: 16px;
+  }
 }
 
 .site-footer {
