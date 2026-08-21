@@ -90,7 +90,7 @@ export function AgencyIntroduction({ agency }) {
           <img
             src="/assets/Board.png"
             alt="Historia"
-            className="w-full md:w-1/2 h-auto rounded-lg shadow-lg"
+            className="w-full md:w-1/2 h-auto rounded-lg"
           />
         </div>
       </div>

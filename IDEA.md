@@ -38,20 +38,4 @@ Formato: `<tipo>(<alcance opcional>): <descripción corta en presente/infinitivo
 ---
 
 ## 3. Estructura de Carpetas Recomendada (`src/`)
-Mantener una organización limpia y predecible:
-
-```text
-src/
-├── assets/         # Imágenes, logos, fuentes
-├── components/     # Componentes reutilizables UI
-│   ├── layout/     # Header, Footer, Navbar
-│   └── common/     # Botones, Tarjetas, Modales
-├── pages/          # Páginas principales (rutas)
-│   ├── Home.jsx
-│   ├── Agents.jsx
-│   ├── History.jsx
-│   ├── Showcase.jsx
-│   └── RestaurantMenu.jsx
-├── services/       # Llamadas API (ej. TheMealDB)
-├── routes/         # Configuración de React Router
-└── styles/         # Estilos globales / Tailwind
+Mantener una organización limpia y predecible
