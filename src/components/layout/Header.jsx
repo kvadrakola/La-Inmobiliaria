@@ -24,18 +24,11 @@
 import { useEffect, useState } from 'react';
 import { Building2, UtensilsCrossed } from 'lucide-react';
 import { agencyFixture, siteNavigationFixture } from '../../semantic-graph/fixtures.js';
+import { NAVIGATION_ROUTES, ROUTES } from '../../navigation/routes.js';
 import logo from '../../img/logo.png';
 import { Link, useLocation } from 'react-router-dom';
 
 const MOBILE_NAV_ID = 'mobile-navigation';
-
-const NAVIGATION_ROUTES = {
-  'navigate-home': '/',
-  'navigate-search': '/properties',
-  'navigate-restaurant': '/restaurante',
-  'navigate-about': '/about',
-  'navigate-contact': '/contact',
-};
 
 /** Intents that belong to the core business-lines cluster (Propiedades + Restaurante). */
 const BUSINESS_CLUSTER_INTENTS = new Set(['navigate-search', 'navigate-restaurant']);
@@ -48,7 +41,7 @@ const NAVIGATION_ICONS = {
 function BrandIdentityMark() {
   return (
     <Link
-      to="/"
+      to={ROUTES.home}
       className="brand-mark flex items-center gap-2"
       data-node-id={`${agencyFixture.id}-brand-mark`}
       data-node-type="agency"
@@ -67,7 +60,7 @@ function BrandIdentityMark() {
 }
 
 function NavigationAction({ item }) {
-  const route = NAVIGATION_ROUTES[item.intent] ?? '/';
+  const route = NAVIGATION_ROUTES[item.intent] ?? ROUTES.home;
   const Icon = NAVIGATION_ICONS[item.intent];
 
   return (

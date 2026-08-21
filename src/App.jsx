@@ -6,27 +6,28 @@
  */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
+  HomeSceneGraph,
+  SearchSceneGraph,
   DetailSceneGraph,
   ContactSceneGraph,
   AboutSceneGraph,
 } from './semantic-graph';
 import { SemanticActionRouter } from './semantic-graph/SemanticActionRouter.jsx';
-import Home from './pages/Home.jsx';
-import Properties from './pages/Properties.jsx';
 import RestaurantePage from './pages/RestaurantePage.jsx';
+import { ROUTES } from './navigation/routes.js';
 
 export default function App() {
   return (
     <BrowserRouter>
       <SemanticActionRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/buscar" element={<Properties />} />
-          <Route path="/properties" element={<Properties />} />
+          <Route path={ROUTES.home} element={<HomeSceneGraph />} />
+          <Route path={ROUTES.search} element={<SearchSceneGraph />} />
+          <Route path={ROUTES.searchAlias} element={<SearchSceneGraph />} />
           <Route path="/propiedad/:propertyId" element={<DetailSceneGraph />} />
-          <Route path="/contacto" element={<ContactSceneGraph />} />
-          <Route path="/about" element={<AboutSceneGraph />} />
-          <Route path="/restaurante" element={<RestaurantePage />} />
+          <Route path={ROUTES.contact} element={<ContactSceneGraph />} />
+          <Route path={ROUTES.about} element={<AboutSceneGraph />} />
+          <Route path={ROUTES.restaurant} element={<RestaurantePage />} />
         </Routes>
       </SemanticActionRouter>
     </BrowserRouter>

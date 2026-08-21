@@ -7,28 +7,15 @@
  */
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-const NAVIGATION_INTENTS = new Set(['navigate-home', 'navigate-search', 'navigate-restaurant', 'navigate-about', 'navigate-contact', 'expand-detail']);
+import { NAVIGATION_INTENTS, NAVIGATION_ROUTES, ROUTES } from '../navigation/routes.js';
 
 function resolveNavigationTarget(intent, element) {
-  switch (intent) {
-    case 'navigate-home':
-      return '/';
-    case 'navigate-search':
-      return '/buscar';
-    case 'navigate-restaurant':
-      return '/restaurante';
-    case 'navigate-about':
-      return '/about';
-    case 'navigate-contact':
-      return '/contacto';
-    case 'expand-detail': {
-      const propertyId = element.getAttribute('data-ref');
-      return propertyId ? `/propiedad/${propertyId}` : null;
-    }
-    default:
-      return null;
+  if (intent === 'expand-detail') {
+    const propertyId = element.getAttribute('data-ref');
+    return propertyId ? ROUTES.propertyDetail(propertyId) : null;
   }
+
+  return NAVIGATION_ROUTES[intent] ?? null;
 }
 
 export function SemanticActionRouter({ children }) {
@@ -51,10 +38,10 @@ export function SemanticActionRouter({ children }) {
         return;
       }
 
-      const homeAnchor = event.target.closest('a[href="/"]');
+      const homeAnchor = event.target.closest(`a[href="${ROUTES.home}"]`);
       if (homeAnchor) {
         event.preventDefault();
-        navigate('/');
+        navigate(ROUTES.home);
       }
     }
 

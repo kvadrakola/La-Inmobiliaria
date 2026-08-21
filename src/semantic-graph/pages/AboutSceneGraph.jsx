@@ -7,6 +7,7 @@ import { SiteHeader, SiteFooter } from '../nodes/SiteChrome.jsx';
 import { TeamMemberProfileCollection } from '../nodes/AgencyNodes.jsx';
 import { agencyFixture, agentFixtures } from '../fixtures.js';
 import '../../styles/about.css';
+import '../../styles/agents.css';
 
 export default function AboutSceneGraph() {
   return (
@@ -74,7 +75,7 @@ export default function AboutSceneGraph() {
             Operando desde {agencyFixture.foundingYear}
           </p>
         </section>
-        <TeamMemberProfileCollection agents={agentFixtures} className="about-team-collection" />
+        <TeamMemberProfileCollection agents={agentFixtures} className="team-collection team-collection--about" />
       </main>
       <SiteFooter />
     </div>

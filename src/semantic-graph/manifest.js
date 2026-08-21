@@ -14,13 +14,10 @@
  * rendered on at least one of the three pages.
  */
 import { agencyFixture, agentFixtures, propertyFixtures, siteNavigationFixture, legalDocumentCollectionFixture, paymentMethodFixture, searchCriteriaFixture } from './fixtures.js';
+import { findAgentById } from './propertyCatalog.js';
 
 function entry(nodeType, semanticRole, refs = []) {
   return { nodeType, semanticRole, refs };
-}
-
-function findAgent(agentId) {
-  return agentFixtures.find((agent) => agent.id === agentId);
 }
 
 /**
@@ -63,7 +60,7 @@ function buildPropertyEntries(property, { rendersSummary, rendersComplete }) {
       [`${property.compliance.regionalRegistry.id}-sync-status`]: entry('compliance-record', 'status'),
       [property.compliance.feeAgency.id]: entry('fee-agency', 'assertion', [{ ref: p, rel: 'prices' }]),
       [property.actions.contactAgentActionId]: entry('agent', 'action', [
-        { ref: findAgent(property.assignedAgentId).id, rel: 'belongs-to' },
+        { ref: findAgentById(property.assignedAgentId)?.id ?? property.assignedAgentId, rel: 'belongs-to' },
       ]),
       [property.actions.requestViewingActionId]: entry('property', 'action', [{ ref: p, rel: 'belongs-to' }]),
     });

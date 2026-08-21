@@ -13,7 +13,8 @@
 import { SiteHeader, SiteFooter } from '../nodes/SiteChrome.jsx';
 import { AgencyIntroduction, TeamMemberProfileCollection } from '../nodes/AgencyNodes.jsx';
 import { FeaturedListingCollection } from '../nodes/SearchNodes.jsx';
-import { agencyFixture, agentFixtures, propertyFixtures } from '../fixtures.js';
+import { agencyFixture, agentFixtures } from '../fixtures.js';
+import { listingProperties } from '../propertyCatalog.js';
 import '../../styles/agents.css';
 
 export default function HomeSceneGraph() {
@@ -29,8 +30,8 @@ export default function HomeSceneGraph() {
       <SiteHeader />
       <main>
         <AgencyIntroduction agency={agencyFixture} />
-        <TeamMemberProfileCollection agents={agentFixtures} className="team-member-collection" />
-        <FeaturedListingCollection properties={propertyFixtures} />
+        <TeamMemberProfileCollection agents={agentFixtures} className="team-collection" />
+        <FeaturedListingCollection properties={listingProperties.slice(0, 6)} />
       </main>
       <SiteFooter />
     </div>

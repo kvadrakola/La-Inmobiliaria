@@ -13,7 +13,8 @@
  */
 import { SiteHeader, SiteFooter } from '../nodes/SiteChrome.jsx';
 import { PropertySearchCriteriaSummary, PropertySearchResults } from '../nodes/SearchNodes.jsx';
-import { propertyFixtures, searchCriteriaFixture } from '../fixtures.js';
+import { searchCriteriaFixture } from '../fixtures.js';
+import { listingProperties } from '../propertyCatalog.js';
 
 export default function SearchSceneGraph() {
   return (
@@ -28,7 +29,7 @@ export default function SearchSceneGraph() {
       <SiteHeader />
       <main>
         <PropertySearchCriteriaSummary criteria={searchCriteriaFixture} />
-        <PropertySearchResults properties={propertyFixtures} />
+        <PropertySearchResults properties={listingProperties} />
       </main>
       <SiteFooter />
     </div>
