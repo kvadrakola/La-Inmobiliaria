@@ -15,10 +15,11 @@
  * Propiedades → Building2, Restaurante → UtensilsCrossed.
  *
  * The two main business lines (Propiedades + Restaurante) are grouped into a
- * visually distinct cluster so they read as the agency's core services,
- * separated from the informational links (Inicio / Sobre Nosotros / Contacto).
- * On mobile the cluster is rendered as a contained block so both items sit at
- * the same indentation level (never parent/child).
+ * visually distinct cluster so they read as the agency's core services. The
+ * cluster renders immediately after Inicio and before the informational links
+ * (Sobre Nosotros / Contacto). On mobile the cluster is rendered as a
+ * contained block so both items sit at the same indentation level (never
+ * parent/child).
  */
 import { useEffect, useState } from 'react';
 import { Building2, UtensilsCrossed } from 'lucide-react';
@@ -122,7 +123,10 @@ export default function Header() {
 
   const navItems = siteNavigationFixture.items;
   const businessItems = navItems.filter((item) => BUSINESS_CLUSTER_INTENTS.has(item.intent));
-  const infoItems = navItems.filter((item) => !BUSINESS_CLUSTER_INTENTS.has(item.intent));
+  const firstBusinessIndex = navItems.findIndex((item) => BUSINESS_CLUSTER_INTENTS.has(item.intent));
+  const lastBusinessIndex = navItems.findLastIndex((item) => BUSINESS_CLUSTER_INTENTS.has(item.intent));
+  const preClusterItems = navItems.slice(0, firstBusinessIndex);
+  const postClusterItems = navItems.slice(lastBusinessIndex + 1);
 
   return (
     <header className="site-header">
@@ -132,7 +136,7 @@ export default function Header() {
 
       <nav className="site-nav" aria-label="Main navigation">
         <ul className="flex items-center gap-6">
-          {infoItems.map((item) => (
+          {preClusterItems.map((item) => (
             <li key={item.id}>
               <NavigationAction item={item} />
             </li>
@@ -142,6 +146,11 @@ export default function Header() {
               <NavigationAction key={item.id} item={item} />
             ))}
           </li>
+          {postClusterItems.map((item) => (
+            <li key={item.id}>
+              <NavigationAction item={item} />
+            </li>
+          ))}
         </ul>
       </nav>
 
@@ -156,7 +165,7 @@ export default function Header() {
         aria-label="Menú de navegación móvil"
       >
         <ul className="mobile-nav-list">
-          {infoItems.map((item) => (
+          {preClusterItems.map((item) => (
             <li key={item.id}>
               <NavigationAction item={item} />
             </li>
@@ -166,6 +175,11 @@ export default function Header() {
               <NavigationAction key={item.id} item={item} />
             ))}
           </li>
+          {postClusterItems.map((item) => (
+            <li key={item.id}>
+              <NavigationAction item={item} />
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
