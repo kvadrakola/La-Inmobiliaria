@@ -1,22 +1,24 @@
 # Dependencies
 node_modules/
-.pnp
-.pnp.js
 
-# Build
+# Build output
 dist/
 dist-ssr/
 build/
 *.tsbuildinfo
-vite.config.ts.timestamp-*
+tsconfig.tsbuildinfo
+vite.config.*.timestamp-*
 
-# Environment files
+# Vite cache
+.vite/
+cache/
+.cache/
+.tmp/
+
+# Environment
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env.*.local
+.env.*
+!.env.example
 
 # Logs
 logs/
@@ -27,7 +29,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Editor directories and files
+# Test / coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Linters / formatters
+.eslintcache
+.prettiercache
+
+# Editor / IDE
 .vscode/*
 !.vscode/extensions.json
 .idea/
@@ -36,9 +47,11 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
-.cursor/
+*.swp
+*.swo
+*~
 
-# OS files
+# OS
 .DS_Store
 .DS_Store?
 ._*
@@ -48,67 +61,25 @@ ehthumbs.db
 Thumbs.db
 Desktop.ini
 
-# Testing
-coverage/
-.nyc_output/
-*.lcov
+# Local agent / studio scratch (not part of the app)
+.cursor/
+.clinerules/
+CLAUDE.md
+.notion-migrate/
+notion_replacements.json
 
-# TypeScript
-*.tsbuildinfo
-tsconfig.tsbuildinfo
+# Unused / duplicate local assets (canonical copies live in public/ and src/img/logo.png)
+src/components/img/
+src/img/favicon/
+src/img/logo-big.png
+src/img/changeTemplatePage.jpg
+src/img/changeTemplatePage2.jpg
+src/img/Image*.png
 
-# ESLint
-.eslintcache
-
-# Prettier
-.prettiercache
-
-# Vite / VitePress
-cache/
-.cache/
-.tmp/
-
-# IDE
-*.swp
-*.swo
-*~
-*.orig
-
-# Package manager lock files (keep one, ignore the rest)
-# package-lock.json is committed by convention for npm
-# yarn.lock is committed by convention for yarn
-# pnpm-lock.yaml is committed by convention for pnpm
-
-# Optional eslint cache
-.eslintcache
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variable files
-.env.test
-
-# Misc
+# Misc local junk
 *.local
 *.bak
-*.swp
-*.swo
-*~
-
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Studio
-.cursor/
-CLAUDE.md
-
-# Local Notion migration scratch
-.notion-migrate/
+*.orig
+*.tgz
+.node_repl_history
+.yarn-integrity

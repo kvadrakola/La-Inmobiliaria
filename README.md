@@ -12,9 +12,11 @@ Ahí está el material didáctico íntegro: mini-repaso de React con nuestro có
 ## Stack
 
 - **React 19** + **Vite**, con **React Compiler** (`babel-plugin-react-compiler`)
-- **React Router 7** — rutas `/`, `/buscar`, `/propiedad/:id`
-- **Tailwind CSS 4** — instalado en el proyecto; la carpeta `src/semantic-graph` no lo usa a propósito
+- **React Router 7** — rutas centralizadas en [`src/navigation/routes.js`](src/navigation/routes.js)
+- **Tailwind CSS 4** — estilos de chrome y layout; la carpeta `src/semantic-graph` evita CSS de layout a propósito (Zero-Geometry)
 - **Style Dictionary** — tokens W3C (`trust` / `vibrant`) → `src/styles/tokens.css`
+- **Lucide React** — iconos de navegación
+- **Axios** — menú del mini-app Restaurante (TheMealDB)
 
 ## Diseño
 
@@ -40,19 +42,48 @@ npm run build:tokens          # tema Trust
 npm run build:tokens:vibrant  # tema Vibrant
 ```
 
+## Rutas
+
+| Ruta | Página |
+| --- | --- |
+| `/` | `HomeSceneGraph` — historia, equipo, vitrina |
+| `/buscar` | `SearchSceneGraph` — listado completo |
+| `/properties` | Alias de `/buscar` |
+| `/propiedad/:propertyId` | `DetailSceneGraph` — ficha (ids `listing-N` o `property-00N`) |
+| `/contacto` | `ContactSceneGraph` |
+| `/about` | `AboutSceneGraph` |
+| `/restaurante` | Mini-app de menú colombiano |
+
+La navegación por `data-action-intent` la resuelve [`SemanticActionRouter`](src/semantic-graph/SemanticActionRouter.jsx) con el mismo mapa que el [`Header`](src/components/layout/Header.jsx).
+
 ## Estructura
 
 ```
-src/semantic-graph/
-├── domainTypes.js            # formas de datos (JSDoc)
-├── fixtures.js               # datos de ejemplo (single source of truth)
-├── manifest.js               # índice del grafo (nodos + relaciones)
-├── SemanticActionRouter.jsx  # navegación por data-action-intent
-├── nodes/                    # Property, Agency, Search, SiteChrome
-└── pages/                    # Home / Search / Detail Scene Graphs
+src/
+├── App.jsx                     # rutas
+├── navigation/routes.js        # intents → paths (fuente única)
+├── data/
+│   ├── listings.js             # 12 anuncios mock (fuente única)
+│   └── mockData.js             # fetchProperties → LISTINGS
+├── hooks/useProperties.js      # loading / error / data
+├── components/layout/Header.jsx
+├── pages/RestaurantePage.jsx
+├── restaurante/                # cart, API meals, estilos propios
+├── styles/                     # tokens, header, team, detail, about
+├── theme/                      # theme-trust.json / theme-vibrant.json
+└── semantic-graph/
+    ├── domainTypes.js          # formas de datos (JSDoc)
+    ├── fixtures.js             # agencia, agentes, fixtures semánticos
+    ├── propertyCatalog.js      # LISTINGS adaptados + lookup por id
+    ├── manifest.js             # índice del grafo (nodos + relaciones)
+    ├── SemanticActionRouter.jsx
+    ├── nodes/                  # Property, Agency, Search, Contact, SiteChrome
+    └── pages/                  # Home / Search / Detail / Contact / About
 ```
 
-Enrutado en [`src/App.jsx`](src/App.jsx): tres escenas montadas con `HomeSceneGraph`, `SearchSceneGraph` y `DetailSceneGraph`. Sin CSS en esa carpeta: Zero-Geometry a propósito.
+Datos de anuncios: editar solo [`src/data/listings.js`](src/data/listings.js). `propertyCatalog` los adapta al shape semántico; `fixtures.js` cubre agencia, equipo y nodos de dominio.
+
+Cada página montada cumple **HEADER / MAIN / FOOTER** (`SiteHeader` + `SiteFooter` desde `SiteChrome`).
 
 ## Contexto español
 
