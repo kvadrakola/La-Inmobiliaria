@@ -5,6 +5,7 @@ import Footer from '../components/layout/Footer.jsx';
 import Button from '../components/ui/Button.jsx';
 import Card from '../components/ui/Card.jsx';
 import { fetchProperties } from '../data/mockData.js';
+import { toPropertyRouteId } from '../semantic-graph/propertyCatalog.js';
 
 export default function Properties() {
   const [properties, setProperties] = useState([]);
@@ -136,6 +137,12 @@ export default function Properties() {
                         <p className="mb-5 text-2xl font-bold" style={{ color: 'var(--color-primary)' }}>{selectedProperty.price} €/mes</p>
                         <p className="mb-5 text-xs" style={{ color: 'var(--color-text-muted)' }}>Gestionado por HabitaFactoría</p>
                         <Button className="w-full">Solicitar visita</Button>
+                        <Link
+                          to={`/propiedad/${toPropertyRouteId(selectedProperty.id)}`}
+                          className="mt-3 flex w-full items-center justify-center rounded-md bg-[#0047ab] px-5 py-2.5 text-sm font-semibold text-white hover:brightness-95"
+                        >
+                          Ver ficha completa
+                        </Link>
                         <button type="button" onClick={() => setSelectedProperty(null)} className="mt-3 w-full rounded-md border-2 border-blue-600 bg-white px-5 py-2.5 text-sm font-medium text-blue-600 hover:bg-blue-50">
                           Volver a propiedades
                         </button>

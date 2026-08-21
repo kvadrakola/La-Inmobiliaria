@@ -12,3 +12,4 @@ export { default as AboutSceneGraph } from './pages/AboutSceneGraph.jsx';
 export { SCENE_GRAPH_MANIFEST } from './manifest.js';
 export * from './fixtures.js';
 export * from './domainTypes.js';
+export { getPropertyById, toPropertyRouteId, propertyCatalog } from './propertyCatalog.js';
