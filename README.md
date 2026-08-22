@@ -149,7 +149,7 @@ Los requisitos de transparencia del mercado español viven como **dato** (detall
 
 El diseño de referencia se realizó en Penpot con las escenas `home-page-001`, `search-page-001` y `detail-page-001` y el set `HabitaFactoría/Trust`.
 
-**[Abrir el archivo en Penpot](https://design.penpot.app/#/view?file-id=8694f143-a620-8054-8008-6790ee178f11&page-id=2be68822-842f-8175-8008-677e92a06f90&section=interactions&index=0&share-id=2be68822-842f-817f-8008-6796bd4d3f53)**
+**[Abrir el archivo en Penpot](https://design.penpot.app/#/view?file-id=8694f143-a620-8054-8008-6790ee178f11&page-id=2be68822-842f-8175-8008-677e92a06f90&section=interactions&index=0&share-id=2be68822-842f-8175-8008-6796bd4d3f53)**
 
 ## Capturas de la aplicación
 
